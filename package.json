@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install",
+    "prepare": "husky install && panda codegen --clean",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest -u"
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@pandacss/dev": "^0.13.1",
     "@storybook/addon-essentials": "^7.4.0",
     "@storybook/addon-interactions": "^7.4.0",
     "@storybook/addon-links": "^7.4.0",
