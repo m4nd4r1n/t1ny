@@ -1,3 +1,5 @@
+import { Button } from './SampleButton.styles';
+
 interface ButtonProps {
   /**
    * Is this the principal call to action on the page?
@@ -31,42 +33,17 @@ const SampleButton: React.FC<ButtonProps> = ({
   label,
   ...props
 }) => {
-  const mode = primary
-    ? 'text-white bg-[#1ea7fd]'
-    : 'text-[#333] bg-transparent shadow-[rgba(0,0,0,0.15)_0px_0px_0px_1px_inset]';
-
   return (
-    <button
+    <Button
       type='button'
-      className={[
-        'inline-block cursor-pointer rounded-[3em] border-0 font-sans font-bold',
-        getSize(size),
-        mode,
-      ].join(' ')}
+      primary={primary}
+      size={size}
+      style={{ backgroundColor }}
       {...props}
     >
       {label}
-      <style jsx>{`
-        button {
-          background-color: ${backgroundColor};
-        }
-      `}</style>
-    </button>
+    </Button>
   );
-};
-
-const getSize = (size: string) => {
-  switch (size) {
-    case 'small': {
-      return 'text-xs px-4 py-2.5';
-    }
-    case 'large': {
-      return 'text-base px-6 py-3';
-    }
-    default: {
-      return 'text-sm px-5 py-2.5';
-    }
-  }
 };
 
 export default SampleButton;
