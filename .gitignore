@@ -39,3 +39,7 @@ next-env.d.ts
 
 # Panda CSS
 styled-system
+
+# Storybook
+storybook-static
+build-storybook.log
