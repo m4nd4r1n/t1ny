@@ -6,11 +6,8 @@ on:
       - main
 
 jobs:
-  deploy:
+  build_and_push:
     runs-on: ubuntu-latest
-    environment:
-      name: Production
-      url: ${{ vars.DOMAIN }}
     steps:
       - uses: actions/checkout@v3
 
@@ -43,3 +40,12 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: ${{ vars.DOCKER_PLATFORMS }}
+
+  trigger_webhook:
+    needs: build_and_push
+    environment:
+      name: Production
+      url: ${{ vars.DOMAIN }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Trigger webhook'
