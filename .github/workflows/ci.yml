@@ -182,6 +182,9 @@ jobs:
         run: pnpm build
 
   chromatic-deploy:
+    environment:
+      name: Storybook
+      url: ${{ vars.DOMAIN }}
     runs-on: ubuntu-latest
     needs:
       - lint
