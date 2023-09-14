@@ -1,4 +1,4 @@
-import { Button } from './SampleButton.styles';
+import { sampleButton } from './SampleButton.styles';
 
 interface ButtonProps {
   /**
@@ -34,15 +34,18 @@ const SampleButton: React.FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <Button
+    <button
       type='button'
-      primary={primary}
-      size={size}
-      style={{ backgroundColor }}
+      className={sampleButton({ primary, size })}
       {...props}
     >
       {label}
-    </Button>
+      <style jsx>{`
+        button {
+          background-color: ${backgroundColor};
+        }
+      `}</style>
+    </button>
   );
 };
 
