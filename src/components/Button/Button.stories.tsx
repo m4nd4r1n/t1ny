@@ -22,6 +22,11 @@ const meta = {
       },
       options: ['small', 'medium', 'large'],
     },
+    fullWidth: {
+      control: {
+        type: 'boolean',
+      },
+    },
   },
   decorators: [
     (Story) => (
