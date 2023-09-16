@@ -23,8 +23,12 @@ export default withTV({
       borderWidth: {
         '3': '3px',
       },
+      minHeight: {
+        'screen-header': 'calc(100dvh - 4rem)',
+      },
     },
     colors: {
+      inherit: colors.inherit,
       current: colors.current,
       transparent: colors.transparent,
       white: colors.white,
@@ -33,7 +37,9 @@ export default withTV({
       primary: 'hsl(212,100%,47%)',
       secondary: 'hsl(270,59%,58%)',
       danger: 'hsl(339,90%,51%)',
+      gray: colors.stone[100],
+      'dark-gray': colors.stone[900],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 } satisfies Config);
