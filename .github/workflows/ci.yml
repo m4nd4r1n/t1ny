@@ -14,6 +14,7 @@ jobs:
       src_build_only_changed: ${{ steps.changed-files-yaml.outputs.src_build_only_any_changed }}
       test_changed: ${{ steps.changed-files-yaml.outputs.test_any_changed }}
       stories_changed: ${{ steps.changed-files-yaml.outputs.stories_any_changed }}
+      branch: ${{ steps.branch.outputs.branch }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -38,6 +39,9 @@ jobs:
               - '**/*.stories.ts'
               - '**/*.stories.tsx'
               - '**/*.stories.mdx'
+      - id: branch
+        run: |
+          echo "branch=$(echo '${{ github.head_ref }}' | sed 's/\//\-/g')" >> $GITHUB_OUTPUT
 
   cache-deps:
     runs-on: ubuntu-latest
@@ -184,7 +188,7 @@ jobs:
   chromatic-deploy:
     environment:
       name: Storybook
-      url: ${{ vars.DOMAIN }}
+      url: https://${{ needs.changed_files.outputs.branch }}--${{ vars.CHROMATIC_DOMAIN }}
     runs-on: ubuntu-latest
     needs:
       - lint
