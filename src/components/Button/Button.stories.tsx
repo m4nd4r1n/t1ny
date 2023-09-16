@@ -27,6 +27,11 @@ const meta = {
         type: 'boolean',
       },
     },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
   },
   decorators: [
     (Story) => (
