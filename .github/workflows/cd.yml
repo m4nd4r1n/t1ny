@@ -27,7 +27,7 @@ jobs:
       - name: Create .env.production.local
         shell: bash
         run: |
-          echo "${{ secrets.ENVIRONMENTS }}" > .env.production.local
+          echo "${{ secrets.ENVIRONMENTS }}" >> .env.production
 
       - name: Build and push docker image
         uses: docker/build-push-action@v4
