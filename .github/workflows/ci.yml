@@ -175,6 +175,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Create .env.production.local
+        shell: bash
+        run: |
+          echo "${{ secrets.ENVIRONMENTS }}" > .env.production.local
+
       - name: Install dependencies
         run: pnpm install
 
@@ -182,6 +187,9 @@ jobs:
         run: pnpm build
 
   chromatic-deploy:
+    environment:
+      name: Storybook
+      url: ${{ steps.chromatic.outputs.storybookUrl }}
     runs-on: ubuntu-latest
     needs:
       - lint
@@ -221,7 +229,13 @@ jobs:
         run: pnpm install
 
       - name: Publish to Chromatic
+        id: chromatic
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           zip: true
+
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: '🚀 Storybook: ${{ steps.chromatic.outputs.storybookUrl }}'
