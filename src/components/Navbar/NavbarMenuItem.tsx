@@ -2,11 +2,25 @@ import type { Props } from '@/libs/types';
 
 import { useNavBarContext } from './context';
 
-const NavbarMenuItem: React.FC<Props> = ({ children, ...props }) => {
+interface NavbarMenuContentProps extends Props<HTMLDivElement> {
+  justify?: 'start' | 'end';
+  className?: string;
+}
+
+const NavbarMenuItem: React.FC<NavbarMenuContentProps> = ({
+  children,
+  justify = 'start',
+  className,
+  ...props
+}) => {
   const { slots } = useNavBarContext();
 
   return (
-    <div className={slots.menuItem()} {...props}>
+    <div
+      className={slots.menuItem({ className })}
+      data-justify={justify}
+      {...props}
+    >
       {children}
     </div>
   );

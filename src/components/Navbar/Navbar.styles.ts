@@ -100,6 +100,17 @@ export const navbar = tv({
       'border-r',
       'border-default/10',
     ],
-    menuItem: 'text-lg',
+    menuItem: [
+      'flex',
+      'gap-2',
+      'items-center',
+      'justify-center',
+      'flex-col',
+      'data-[justify=start]:justify-start',
+      'data-[justify=end]:justify-end',
+      'flex-grow',
+      'basis-0',
+      'flex-nowrap',
+    ],
   },
 });

@@ -175,6 +175,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Create .env.production.local
+        shell: bash
+        run: |
+          echo "${{ secrets.ENVIRONMENTS }}" > .env.production.local
+
       - name: Install dependencies
         run: pnpm install
 
