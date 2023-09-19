@@ -24,6 +24,11 @@ jobs:
         run: |
           echo "VERSION=$(echo '${{ github.event.head_commit.message }}' | grep -o -E 'v[0-9]+\.[0-9]+\.[0-9]+')" >> $GITHUB_ENV
 
+      - name: Create .env.production.local
+        shell: bash
+        run: |
+          echo "${{ secrets.ENVIRONMENTS }}" > .env.production.local
+
       - name: Build and push docker image
         uses: docker/build-push-action@v4
         with:
