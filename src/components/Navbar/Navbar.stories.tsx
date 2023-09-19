@@ -11,6 +11,7 @@ import {
   NavbarMenuToggle,
 } from '.';
 import { Button } from '../Button';
+import { Link } from '../Link';
 
 const meta = {
   title: 'Components/Navbar',
@@ -88,9 +89,18 @@ const TemplateWithMenu = () => (
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>{item}</NavbarMenuItem>
-        ))}
+        <NavbarMenuItem>
+          {menuItems.slice(0, 4).map((item, index) => (
+            <Link key={`${item}-${index}`} href='#' isFull isBlock>
+              {item}
+            </Link>
+          ))}
+        </NavbarMenuItem>
+        <NavbarMenuItem justify='end'>
+          <Link href='#' isFull isBlock>
+            {menuItems[4]}
+          </Link>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   </App>
