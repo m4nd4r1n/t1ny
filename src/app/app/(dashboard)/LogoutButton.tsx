@@ -1,17 +1,21 @@
 'use client';
 
-import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+
+import { FiLogOut } from 'react-icons/fi';
 
 import { Button } from '@/components/Button';
 
 const LogoutButton = () => {
+  const router = useRouter();
   const onButtonClick = () => {
-    signOut();
+    fetch('/api/logout', { method: 'POST' }).then(() => router.refresh());
   };
 
   return (
     <Button color='primary' fullWidth onClick={onButtonClick}>
       Logout
+      <FiLogOut className='h-4 w-4 text-white' />
     </Button>
   );
 };
