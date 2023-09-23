@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { iconFont, suitVariable } from './fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -10,7 +11,11 @@ export const metadata: Metadata = {
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <html lang='ko'>
-      <body>{children}</body>
+      <body
+        className={`${iconFont.variable} ${suitVariable.variable} font-suit`}
+      >
+        {children}
+      </body>
     </html>
   );
 };

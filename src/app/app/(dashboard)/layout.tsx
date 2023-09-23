@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import { Link } from '@/components/Link';
+import LogoLink from '@/components/LogoLink';
 import {
   Navbar,
   NavbarContent,
@@ -33,9 +34,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
       <Navbar>
         <NavbarMenuToggle />
         <NavbarLogo>
-          <Link href='#' color='default' isBlock>
-            t1ny
-          </Link>
+          <LogoLink />
         </NavbarLogo>
         <NavbarContent justify='end'>
           <NavbarItem>
