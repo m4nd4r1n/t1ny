@@ -1,6 +1,7 @@
 import { withTV } from 'tailwind-variants/transformer';
 import type { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default withTV({
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -25,6 +26,13 @@ export default withTV({
       },
       minHeight: {
         'screen-header': 'calc(100dvh - 4rem)',
+      },
+      fontFamily: {
+        icon: 'var(--icon-font)',
+        suit: ['var(--suit-font)', ...defaultTheme.fontFamily.sans],
+      },
+      content: {
+        logo: "'\\e900'",
       },
       transitionProperty: {
         background: 'background',
