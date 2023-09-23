@@ -26,6 +26,9 @@ export default withTV({
       minHeight: {
         'screen-header': 'calc(100dvh - 4rem)',
       },
+      transitionProperty: {
+        background: 'background',
+      },
     },
     colors: {
       inherit: colors.inherit,
