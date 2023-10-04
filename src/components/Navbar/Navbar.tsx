@@ -5,9 +5,12 @@ import type { Props } from '@/libs/types';
 import { navbar } from './Navbar.styles';
 import { NavbarContext } from './context';
 
-const Navbar: React.FC<Props> = ({ children, ...props }) => {
+interface NavbarProps extends Props {
+  menu?: React.ReactNode;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ children, menu, ...props }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [menuRoot, setMenuRoot] = useState<HTMLDivElement | null>(null);
 
   const slots = navbar();
 
@@ -15,14 +18,14 @@ const Navbar: React.FC<Props> = ({ children, ...props }) => {
     setIsMenuOpen((prevState) => !prevState);
   };
 
-  const context = { isMenuOpen, slots, toggleMenu, menuRoot };
+  const context = { isMenuOpen, slots, toggleMenu };
 
   return (
     <NavbarContext.Provider value={context}>
       <nav className={slots.nav()} {...props}>
         <header className={slots.wrapper()}>{children}</header>
       </nav>
-      <div ref={(el) => setMenuRoot(el)}></div>
+      {menu}
     </NavbarContext.Provider>
   );
 };

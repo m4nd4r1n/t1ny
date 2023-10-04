@@ -52,19 +52,22 @@ describe('Navbar component', () => {
   it('should render correctly with menu', () => {
     const items = ['item1', 'item2', 'item3', 'item4', 'item5'];
 
+    const menuNode = (
+      <NavbarMenu data-testid='navbar-menu-test'>
+        {items.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>{item}</NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+    );
+
     const wrapper = render(
-      <Navbar data-testid='navbar-test'>
+      <Navbar menu={menuNode} data-testid='navbar-test'>
         <NavbarMenuToggle data-testid='navbar-toggle-test' />
         <NavbarContent data-testid='navbar-content-test'>
           {items.map((item, index) => (
             <NavbarItem key={`${item}-${index}`}>{item}</NavbarItem>
           ))}
         </NavbarContent>
-        <NavbarMenu data-testid='navbar-menu-test'>
-          {items.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>{item}</NavbarMenuItem>
-          ))}
-        </NavbarMenu>
       </Navbar>,
     );
 

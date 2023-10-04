@@ -29,9 +29,23 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
   if (!session) {
     redirect('/login');
   }
+
+  const menu = (
+    <NavbarMenu>
+      <NavbarMenuItem>
+        <Link isBlock isFull>
+          Home
+        </Link>
+      </NavbarMenuItem>
+      <NavbarMenuItem justify='end'>
+        <LogoutButton />
+      </NavbarMenuItem>
+    </NavbarMenu>
+  );
+
   return (
     <div>
-      <Navbar>
+      <Navbar menu={menu}>
         <NavbarMenuToggle />
         <NavbarLogo>
           <LogoLink />
@@ -41,18 +55,10 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
             <Profile />
           </NavbarItem>
         </NavbarContent>
-        <NavbarMenu>
-          <NavbarMenuItem>
-            <Link href='#' isBlock isFull>
-              Home
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem justify='end'>
-            <LogoutButton />
-          </NavbarMenuItem>
-        </NavbarMenu>
       </Navbar>
-      <div className='min-h-screen-header sm:ml-60'>{children}</div>
+      <div className='h-screen-header max-w-screen-xl p-8 sm:ml-60 2xl:ml-96'>
+        {children}
+      </div>
     </div>
   );
 };

@@ -6,7 +6,6 @@ interface NavbarContext {
   isMenuOpen?: boolean;
   slots: ReturnType<typeof navbar>;
   toggleMenu: React.MouseEventHandler<HTMLButtonElement>;
-  menuRoot: HTMLDivElement | null;
 }
 
 export const NavbarContext = createContext<NavbarContext | undefined>(

@@ -11,7 +11,6 @@ export const navbar = tv({
       'h-auto',
       'w-full',
       'items-center',
-      'justify-center',
       'bg-gray-light/80',
       'backdrop-blur-lg',
       'dark:bg-gray/80',
@@ -19,7 +18,7 @@ export const navbar = tv({
       'border-default/10',
     ],
     wrapper:
-      'relative z-40 flex h-16 w-full max-w-full flex-nowrap items-center justify-between gap-4 px-6',
+      'relative z-40 flex h-16 w-full max-w-nav flex-nowrap items-center justify-between gap-4 px-6',
     toggle:
       'group flex h-full w-6 items-center justify-center rounded-md outline-none sm:hidden',
     srOnly: 'sr-only',
@@ -99,6 +98,7 @@ export const navbar = tv({
       'p-4',
       'border-r',
       'border-default/10',
+      '2xl:w-96',
     ],
     menuItem: [
       'flex',

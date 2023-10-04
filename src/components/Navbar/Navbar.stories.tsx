@@ -41,7 +41,7 @@ const App: React.FC<AppProps> = ({ children, isMenu }) => (
     {children}
     <div
       className={`prose min-h-screen-header max-w-full p-4 ${
-        isMenu ? 'sm:ml-60' : ''
+        isMenu ? 'sm:ml-60 2xl:ml-96' : ''
       }`}
     >
       <h1>Lorem ipsum dolor sit ame</h1>
@@ -69,9 +69,26 @@ const Template = () => (
 
 const menuItems = ['Dashboard', 'Links', 'Settings', 'Profile', 'Log Out'];
 
+const menu = (
+  <NavbarMenu>
+    <NavbarMenuItem>
+      {menuItems.slice(0, 4).map((item, index) => (
+        <Link key={`${item}-${index}`} isFull isBlock>
+          {item}
+        </Link>
+      ))}
+    </NavbarMenuItem>
+    <NavbarMenuItem justify='end'>
+      <Link isFull isBlock>
+        {menuItems[4]}
+      </Link>
+    </NavbarMenuItem>
+  </NavbarMenu>
+);
+
 const TemplateWithMenu = () => (
   <App isMenu>
-    <Navbar>
+    <Navbar menu={menu}>
       <NavbarMenuToggle />
       <NavbarLogo>Logo</NavbarLogo>
       <NavbarContent justify='end'>
@@ -88,20 +105,6 @@ const TemplateWithMenu = () => (
           </div>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
-        <NavbarMenuItem>
-          {menuItems.slice(0, 4).map((item, index) => (
-            <Link key={`${item}-${index}`} href='#' isFull isBlock>
-              {item}
-            </Link>
-          ))}
-        </NavbarMenuItem>
-        <NavbarMenuItem justify='end'>
-          <Link href='#' isFull isBlock>
-            {menuItems[4]}
-          </Link>
-        </NavbarMenuItem>
-      </NavbarMenu>
     </Navbar>
   </App>
 );
