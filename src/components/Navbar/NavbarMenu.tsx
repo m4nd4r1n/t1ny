@@ -1,5 +1,3 @@
-import { createPortal } from 'react-dom';
-
 import type { Props } from '@/libs/types';
 
 import { useNavBarContext } from './context';
@@ -8,11 +6,9 @@ const NavbarMenu: React.FC<Props<HTMLDivElement>> = ({
   children,
   ...props
 }) => {
-  const { isMenuOpen, slots, menuRoot } = useNavBarContext();
+  const { isMenuOpen, slots } = useNavBarContext();
 
-  if (!menuRoot) return null;
-
-  return createPortal(
+  return (
     <div
       className={slots.menu({
         className: isMenuOpen ? 'w-full translate-x-0' : '-translate-x-full',
@@ -21,8 +17,7 @@ const NavbarMenu: React.FC<Props<HTMLDivElement>> = ({
       {...props}
     >
       {children}
-    </div>,
-    menuRoot,
+    </div>
   );
 };
 
