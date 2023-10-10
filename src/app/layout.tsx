@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { Toaster } from 'sonner';
+
 import { iconFont, suitVariable } from './fonts';
 import './globals.css';
 
@@ -14,6 +16,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
       <body
         className={`${iconFont.variable} ${suitVariable.variable} font-suit`}
       >
+        <Toaster richColors position='top-center' closeButton />
         {children}
       </body>
     </html>
