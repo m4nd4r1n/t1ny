@@ -12,6 +12,7 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@/components/Navbar';
+import { BLOCKED_REDIRECT_URL } from '@/libs/constants';
 import { getPageSession } from '@/libs/lucia';
 
 import LogoutButton from './LogoutButton';
@@ -29,6 +30,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
   if (!session) {
     redirect('/login');
   }
+  if (session.user.role === 'BLOCKED') redirect(BLOCKED_REDIRECT_URL);
 
   const menu = (
     <NavbarMenu>

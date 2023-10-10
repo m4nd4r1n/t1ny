@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const AuthLayout: React.FC<React.PropsWithChildren> = async ({ children }) => {
   const session = await getPageSession();
 
-  if (session) {
+  if (session && session.user.role !== 'BLOCKED') {
     redirect('/');
   }
 
