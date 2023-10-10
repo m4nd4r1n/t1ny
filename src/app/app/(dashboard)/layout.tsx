@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { Link } from '@/components/Link';
 import LogoLink from '@/components/LogoLink';
 import {
   Navbar,
@@ -16,6 +15,7 @@ import { BLOCKED_REDIRECT_URL } from '@/libs/constants';
 import { getPageSession } from '@/libs/lucia';
 
 import LogoutButton from './LogoutButton';
+import MenuItemLinks from './MenuItemLinks';
 import Profile from './Profile';
 
 export const metadata: Metadata = {
@@ -34,11 +34,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
 
   const menu = (
     <NavbarMenu>
-      <NavbarMenuItem>
-        <Link isBlock isFull>
-          Home
-        </Link>
-      </NavbarMenuItem>
+      <MenuItemLinks />
       <NavbarMenuItem justify='end'>
         <LogoutButton />
       </NavbarMenuItem>
@@ -58,9 +54,9 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
           </NavbarItem>
         </NavbarContent>
       </Navbar>
-      <div className='h-screen-header max-w-screen-xl p-8 sm:ml-60 2xl:ml-96'>
+      <main className='h-screen-header max-w-screen-xl p-8 sm:ml-60 2xl:ml-96'>
         {children}
-      </div>
+      </main>
     </div>
   );
 };
