@@ -25,7 +25,7 @@ export default withTV({
         '3': '3px',
       },
       minHeight: {
-        'screen-header': 'calc(100dvh - 4rem)',
+        'screen-header': 'calc(100dvh - 4rem - 1px)',
       },
       height: {
         'screen-header': 'calc(100dvh - 4rem - 1px)',
