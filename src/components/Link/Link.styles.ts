@@ -36,10 +36,15 @@ export const link = tv({
       true: 'pointer-events-none select-none opacity-50',
     },
     isFull: {
-      true: 'w-full justify-center',
+      true: 'w-full',
     },
     isExternal: {
       true: 'after:ml-1 after:content-["_↗"]',
+    },
+    justify: {
+      start: 'justify-start',
+      center: 'justify-center',
+      end: 'justify-end',
     },
   },
   compoundVariants: [
@@ -71,5 +76,6 @@ export const link = tv({
     isDisabled: false,
     isFull: false,
     isExternal: false,
+    justify: 'center',
   },
 });

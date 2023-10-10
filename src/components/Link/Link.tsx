@@ -12,6 +12,7 @@ interface LinkProps extends Props<HTMLAnchorElement>, LinkVariants {
   href?: string;
   isExternal?: boolean;
   className?: string;
+  justify?: 'start' | 'end' | 'center';
 }
 
 const Link: React.FC<LinkProps> = ({
@@ -24,6 +25,7 @@ const Link: React.FC<LinkProps> = ({
   isDisabled,
   isFull,
   className,
+  justify,
   ...props
 }) => {
   const variants = {
@@ -34,6 +36,7 @@ const Link: React.FC<LinkProps> = ({
     size,
     isExternal,
     className,
+    justify,
   };
 
   const relTargetAttributes = isExternal
