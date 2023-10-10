@@ -24,10 +24,12 @@ model User {
   role           Role     @default(USER)
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
+  day_limit      Int      @default(20)
+  total_limit    Int      @default(500)
 
   auth_session Session[]
   key          Key[]
-  url          URL[]
+  url          Url[]
 }
 
 model Session {
@@ -51,12 +53,13 @@ model Key {
   @@index([user_id])
 }
 
-model URL {
+model Url {
   id         String   @id @unique
   user_id    String
   target_url String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  clicks     Int      @default(0)
 
   user      User        @relation(fields: [user_id], references: [id])
   analytics Analytics[]
@@ -67,12 +70,12 @@ model URL {
 model Analytics {
   id         String   @id @default(cuid())
   url_id     String
-  ip_address String
-  referer    String
-  user_agent String
+  ip_address String?
+  user_agent String?
   created_at DateTime @default(now())
+  country    String?
 
-  url URL @relation(fields: [url_id], references: [id])
+  url Url @relation(fields: [url_id], references: [id])
 
   @@index([url_id])
 }
