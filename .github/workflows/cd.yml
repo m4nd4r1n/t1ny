@@ -29,6 +29,11 @@ jobs:
         run: |
           echo "${{ secrets.ENVIRONMENTS }}" >> .env
 
+      - name: Create .sentryclirc
+        shell: bash
+        run: |
+          echo "${{ secrets.SENTRYCLIRC }}" >> .sentryclirc
+
       - name: Build and push docker image
         uses: docker/build-push-action@v4
         with:
