@@ -28,6 +28,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
     "react-lorem-ipsum": "^1.4.10",
+    "sharp": "^0.32.6",
     "sonner": "^1.0.3",
     "tailwind-variants": "^0.1.14"
   },
