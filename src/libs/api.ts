@@ -7,7 +7,7 @@ const api = (path: `/${string}`, init?: RequestInit) =>
   );
 
 const serverApi = (path: `/${string}`, init?: RequestInit) =>
-  fetch(`http://127.0.0.1:3000/api${path}`, init);
+  fetch(`http://${process.env.HOSTNAME}:3000/api${path}`, init);
 
 export const createLink = (body: { destination: string }) =>
   api('/link', {
@@ -25,4 +25,4 @@ export const deleteLink = (id: string) =>
 export const getLinkLimits = (headers?: HeadersInit) =>
   serverApi(`/link/limits`, { headers });
 
-export const logout = () => api('/logout', { method: 'POST' });
+export const logout = () => api('/auth/logout', { method: 'POST' });
