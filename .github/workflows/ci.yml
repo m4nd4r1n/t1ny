@@ -180,6 +180,11 @@ jobs:
         run: |
           echo "${{ secrets.ENVIRONMENTS }}" >> .env
 
+      - name: Create .sentryclirc
+        shell: bash
+        run: |
+          echo "${{ secrets.SENTRYCLIRC }}" >> .sentryclirc
+
       - name: Install dependencies
         run: pnpm install
 
