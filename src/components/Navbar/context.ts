@@ -5,8 +5,7 @@ import type { navbar } from './Navbar.styles';
 interface NavbarContext {
   isMenuOpen?: boolean;
   slots: ReturnType<typeof navbar>;
-  toggleMenu: React.MouseEventHandler<HTMLButtonElement>;
-  menuRoot: HTMLDivElement | null;
+  toggleMenu: () => void;
 }
 
 export const NavbarContext = createContext<NavbarContext | undefined>(

@@ -22,6 +22,17 @@ const meta = {
       },
       options: ['small', 'medium', 'large'],
     },
+    justify: {
+      control: {
+        type: 'radio',
+      },
+      options: ['start', 'center', 'end'],
+    },
+    href: {
+      table: {
+        disable: true,
+      },
+    },
   },
   decorators: [
     (Story) => (

@@ -1,4 +1,7 @@
-import { Link } from '@/components/Link';
+import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
+
+import LogoLink from '@/components/LogoLink';
 import {
   Navbar,
   NavbarContent,
@@ -8,37 +11,52 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@/components/Navbar';
+import { BLOCKED_REDIRECT_URL } from '@/libs/constants';
+import { getPageSession } from '@/libs/lucia';
 
 import LogoutButton from './LogoutButton';
+import MenuItemLinks from './MenuItemLinks';
 import Profile from './Profile';
 
-const DashboardLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const metadata: Metadata = {
+  title: 't1ny | Dashboard',
+};
+
+const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
+  children,
+}) => {
+  const session = await getPageSession();
+
+  if (!session) {
+    redirect('/login');
+  }
+  if (session.user.role === 'BLOCKED') redirect(BLOCKED_REDIRECT_URL);
+
+  const menu = (
+    <NavbarMenu>
+      <MenuItemLinks />
+      <NavbarMenuItem justify='end'>
+        <LogoutButton />
+      </NavbarMenuItem>
+    </NavbarMenu>
+  );
+
   return (
     <div>
-      <Navbar>
+      <Navbar menu={menu}>
         <NavbarMenuToggle />
         <NavbarLogo>
-          <Link href='#' color='default' isBlock>
-            t1ny
-          </Link>
+          <LogoLink />
         </NavbarLogo>
         <NavbarContent justify='end'>
           <NavbarItem>
             <Profile />
           </NavbarItem>
         </NavbarContent>
-        <NavbarMenu>
-          <NavbarMenuItem>
-            <Link href='#' isBlock isFull>
-              Home
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem justify='end'>
-            <LogoutButton />
-          </NavbarMenuItem>
-        </NavbarMenu>
       </Navbar>
-      <div className='min-h-screen-header sm:ml-60'>{children}</div>
+      <main className='h-screen-header max-w-screen-xl p-8 sm:ml-60 2xl:ml-96'>
+        {children}
+      </main>
     </div>
   );
 };
