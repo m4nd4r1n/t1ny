@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 
+import { load } from 'cheerio';
 import { customAlphabet } from 'nanoid';
+import puppeteer from 'puppeteer-core';
 
 import { BadRequestError } from '@/libs/error';
 import { withErrorHandler } from '@/libs/handler';
@@ -33,12 +35,29 @@ export const POST = withErrorHandler(
     if (link) throw new BadRequestError('Already exists');
 
     const id = await generateId();
+    const browser = await puppeteer.connect({
+      browserWSEndpoint: process.env.BROWSER_WS_ENDPOINT,
+    });
+    const page = await browser.newPage();
+    await page.goto(destination);
+    const html = await page.content();
+    await browser.close();
+    const $ = load(html);
+    const getMetadata = (selector: string) => $(selector).attr('content');
+    const title = $('title').text();
+    const description = getMetadata('meta[name="description"]');
+    const image = getMetadata('meta[property="og:image"]');
+    const targetDomain = new URL(destination).hostname;
 
     await prisma.$transaction([
       prisma.url.create({
         data: {
           id,
           target_url: destination,
+          target_title: title,
+          target_description: description,
+          target_og_image: image,
+          target_favicon: `https://www.google.com/s2/favicons?domain=${targetDomain}&sz=32`,
           user: { connect: { id: userId } },
         },
       }),
