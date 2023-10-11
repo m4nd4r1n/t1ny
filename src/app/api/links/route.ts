@@ -10,7 +10,13 @@ export const GET = withErrorHandler(
 
     const links = await prisma.url.findMany({
       where: { user: { id: userId } },
-      select: { id: true, target_url: true, created_at: true },
+      select: {
+        id: true,
+        target_url: true,
+        created_at: true,
+        target_favicon: true,
+        target_title: true,
+      },
       orderBy: { created_at: 'desc' },
     });
 

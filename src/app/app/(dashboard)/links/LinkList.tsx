@@ -19,13 +19,8 @@ const LinkList = async () => {
 
   return (
     <div className='flex h-full flex-col gap-4 overflow-y-scroll'>
-      {links.map(({ id, target_url, created_at }) => (
-        <LinkListItem
-          key={id}
-          urlId={id}
-          targetUrl={target_url}
-          createdAt={created_at}
-        />
+      {links.map((link) => (
+        <LinkListItem key={link.id} link={link} />
       ))}
       {!!links.length && (
         <div className='flex items-center justify-center gap-4 before:h-px before:w-16 before:border-b before:border-default-500 after:h-px after:w-16 after:border-b after:border-default-500'>

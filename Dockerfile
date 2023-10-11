@@ -7,9 +7,11 @@ COPY . /app
 WORKDIR /app
 
 FROM base AS prod-deps
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
 FROM base AS builder
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN pnpm run build
