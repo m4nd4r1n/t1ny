@@ -6,6 +6,7 @@ import { LuLayoutDashboard, LuLink, LuSettings } from 'react-icons/lu';
 
 import { Link } from '@/components/Link';
 import { NavbarMenuItem } from '@/components/Navbar';
+import { useNavBarContext } from '@/components/Navbar';
 
 const menuItems = [
   {
@@ -27,6 +28,11 @@ const menuItems = [
 
 const MenuItemLinks = () => {
   const pathname = usePathname();
+  const { toggleMenu } = useNavBarContext();
+
+  const onClick = () => {
+    if (window.innerWidth < 640) toggleMenu();
+  };
 
   return (
     <NavbarMenuItem>
@@ -38,6 +44,7 @@ const MenuItemLinks = () => {
           isFull
           color={pathname === href ? 'primary' : 'default'}
           justify='start'
+          onClick={onClick}
         >
           {icon}
           {label}

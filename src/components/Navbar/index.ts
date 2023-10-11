@@ -7,3 +7,4 @@ export { default as NavbarLogo } from './NavbarLogo';
 export { default as NavbarMenu } from './NavbarMenu';
 export { default as NavbarMenuItem } from './NavbarMenuItem';
 export { default as NavbarMenuToggle } from './NavbarMenuToggle';
+export { useNavBarContext } from './context';
