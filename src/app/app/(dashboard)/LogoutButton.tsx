@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 
 import { Button } from '@/components/Button';
-import { api } from '@/libs/api';
+import { logout } from '@/libs/api';
 
 const LogoutButton = () => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ const LogoutButton = () => {
 
   const onButtonClick = () => {
     setLoading(true);
-    api('/auth/logout', { method: 'POST' })
+    logout()
       .then(() => router.refresh())
       .finally(() => setLoading(false));
   };
