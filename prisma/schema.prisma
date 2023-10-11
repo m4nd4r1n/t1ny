@@ -54,14 +54,18 @@ model Key {
 }
 
 model Url {
-  id         String   @id @unique
-  user_id    String
-  target_url String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  clicks     Int      @default(0)
+  id                 String   @id @unique
+  user_id            String
+  target_url         String   @db.Text
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  clicks             Int      @default(0)
+  target_og_image    String?  @db.Text
+  target_title       String?  @db.Text
+  target_description String?  @db.Text
+  target_favicon     String   @db.Text
 
-  user      User        @relation(fields: [user_id], references: [id])
+  user      User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
   analytics Analytics[]
 
   @@index([user_id])
@@ -71,11 +75,11 @@ model Analytics {
   id         String   @id @default(cuid())
   url_id     String
   ip_address String?
-  user_agent String?
+  user_agent String?  @db.Text
   created_at DateTime @default(now())
   country    String?
 
-  url Url @relation(fields: [url_id], references: [id])
+  url Url @relation(fields: [url_id], references: [id], onDelete: Cascade)
 
   @@index([url_id])
 }
