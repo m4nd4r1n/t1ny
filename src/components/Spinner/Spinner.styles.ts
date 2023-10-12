@@ -9,7 +9,7 @@ export const spinner = tv({
       'absolute h-full w-full animate-spin rounded-full border-2 border-x-transparent border-t-transparent',
     circle2:
       'absolute h-full w-full animate-spin rounded-full border-2 opacity-20',
-    label: 'text-default dark:text-white',
+    label: 'text-default',
   },
   variants: {
     size: {
