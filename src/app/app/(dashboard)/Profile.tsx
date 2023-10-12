@@ -14,7 +14,7 @@ const Profile = async () => {
           src={session.user.image}
           width={40}
           height={40}
-          alt={session.user.name ?? session.user.username}
+          alt={session.user.name}
           className='h-6 w-6 rounded-full'
         />
       )}
