@@ -41,7 +41,7 @@ const App: React.FC<AppProps> = ({ children, isMenu }) => (
     {children}
     <div
       className={`prose min-h-screen-header max-w-full p-4 ${
-        isMenu ? 'sm:ml-60 2xl:ml-96' : ''
+        isMenu ? 'sm:ml-60 2xl:ml-96' : ``
       }`}
     >
       <h1>Lorem ipsum dolor sit ame</h1>
