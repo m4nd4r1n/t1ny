@@ -33,7 +33,7 @@ export const GET = withErrorHandler(async (request: NextRequest) => {
         gh_username: githubUser.login,
         email: githubUser.email,
         image: githubUser.avatar_url,
-        name: githubUser.name,
+        name: githubUser.name ?? githubUser.login,
         role: 'USER',
       },
     });
