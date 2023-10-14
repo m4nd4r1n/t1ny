@@ -42,3 +42,5 @@ storybook-static
 build-storybook.log
 # Sentry Config File
 .sentryclirc
+
+certificates

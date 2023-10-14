@@ -7,7 +7,12 @@ const api = (path: `/${string}`, init?: RequestInit) =>
   );
 
 const serverApi = (path: `/${string}`, init?: RequestInit) =>
-  fetch(`http://${process.env.HOSTNAME}:3000/api${path}`, init);
+  fetch(
+    `${process.env.NEXT_PUBLIC_HTTP_SCHEME || 'http'}://${
+      process.env.HOSTNAME
+    }:3000/api${path}`,
+    init,
+  );
 
 export const createLink = (body: { destination: string }) =>
   api('/link', {
