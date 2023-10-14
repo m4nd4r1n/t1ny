@@ -15,19 +15,5 @@ const config: Config = {
   testEnvironment: 'jest-environment-jsdom',
 };
 
-const esmModules = ['nanoid'];
-
-const jestConfig = async () => {
-  const originalConfig = await createJestConfig(config)();
-
-  return {
-    ...originalConfig,
-    transformIgnorePatterns: [
-      `node_modules/(?!(?:.pnpm/)?(${esmModules.join('|')}))`,
-      '^.+\\.module\\.(css|sass|scss)$',
-    ],
-  };
-};
-
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-export default jestConfig;
+export default createJestConfig(config);
