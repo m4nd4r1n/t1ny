@@ -71,7 +71,42 @@ export default withTV({
         DEFAULT: colors.stone[500],
         dark: colors.stone[900],
       },
+      content: 'hsl(220,9%,46%)',
+      blue: colors.blue['500'],
+      cyan: colors.cyan['500'],
+      sky: colors.sky['500'],
+      indigo: colors.indigo['500'],
+      violet: colors.violet['500'],
+      purple: colors.purple['500'],
+      fuchsia: colors.fuchsia['500'],
+      pink: colors.pink['500'],
+      rose: colors.rose['500'],
+      red: colors.red['500'],
+      orange: colors.orange['500'],
+      amber: colors.amber['500'],
+      yellow: colors.yellow['500'],
+      lime: colors.lime['500'],
+      green: colors.green['500'],
+      teal: colors.teal['500'],
     },
   },
   plugins: [require('@tailwindcss/typography')],
+  safelist: [
+    {
+      pattern:
+        /^(bg-(?:primary|secondary|blue|cyan|sky|indigo|violet|purple|fuchsia|pink|rose|red|orange|amber|yellow|lime|green|teal))$/,
+    },
+    {
+      pattern:
+        /^(text-(?:primary|secondary|blue|cyan|sky|indigo|violet|purple|fuchsia|pink|rose|red|orange|amber|yellow|lime|green|teal))$/,
+    },
+    {
+      pattern:
+        /^(stroke-(?:primary|secondary|blue|cyan|sky|indigo|violet|purple|fuchsia|pink|rose|red|orange|amber|yellow|lime|green|teal))$/,
+    },
+    {
+      pattern:
+        /^(fill-(?:primary|secondary|blue|cyan|sky|indigo|violet|purple|fuchsia|pink|rose|red|orange|amber|yellow|lime|green|teal))$/,
+    },
+  ],
 } satisfies Config);
