@@ -172,6 +172,9 @@ devDependencies:
   prisma:
     specifier: ^5.3.1
     version: 5.3.1
+  resize-observer-polyfill:
+    specifier: ^1.5.1
+    version: 1.5.1
   shelljs:
     specifier: ^0.8.5
     version: 0.8.5
@@ -12319,6 +12322,10 @@ packages:
 
   /requires-port@1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
+    dev: true
+
+  /resize-observer-polyfill@1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
     dev: true
 
   /resolve-cwd@3.0.0:
