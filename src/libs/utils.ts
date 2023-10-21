@@ -4,3 +4,6 @@ export const formatDate = (date: Date): string =>
     month: 'short',
     year: 'numeric',
   }).format(date);
+
+export const random = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;

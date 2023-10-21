@@ -1,3 +1,5 @@
+import { random } from '@/libs/utils';
+
 const months = [
   'Jan',
   'Feb',
@@ -12,9 +14,6 @@ const months = [
   'Nov',
   'Dec',
 ];
-
-const random = (min: number, max: number) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
 
 export const mockData = months.map((month) => ({
   date: `${month} 23`,
