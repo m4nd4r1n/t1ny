@@ -4,7 +4,8 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/Button';
@@ -41,7 +42,7 @@ const LoginButton = () => {
         disabled={loading}
         onClick={onGithubClick}
       >
-        <FaGithub className='h-4 w-4 text-white ' />
+        <FaGithub className='h-5 w-5 text-white ' />
         Login with GitHub
       </Button>
       <Button
@@ -50,7 +51,7 @@ const LoginButton = () => {
         className='bg-white text-default shadow-gray/30'
         onClick={onGoogleClick}
       >
-        <FaGoogle className='h-4 w-4' />
+        <FcGoogle className='h-5 w-5' />
         Login with Google
       </Button>
     </>
