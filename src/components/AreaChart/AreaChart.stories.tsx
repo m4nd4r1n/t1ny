@@ -60,6 +60,7 @@ const defaultProps = {
   autoMinValue: false,
   connectNulls: false,
   showAnimation: false,
+  className: 'h-80',
 };
 
 export const Default: Story = {
