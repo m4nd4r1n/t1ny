@@ -1,21 +1,12 @@
 import { headers } from 'next/headers';
 import Image from 'next/image';
 
-import { getLinks } from '@/libs/api';
+import { API } from '@/libs/api';
 
 import LinkListItem from './LinkListItem';
-import type { Links } from './types';
-
-const fetchLinks = async () => {
-  const res = await getLinks(Object.fromEntries(headers()));
-
-  if (!res.ok) throw new Error('Failed to fetch data');
-
-  return (await res.json()) as Links;
-};
 
 const LinkList = async () => {
-  const links = await fetchLinks();
+  const links = await API.getLinks(Object.fromEntries(headers()));
 
   return (
     <div className='flex h-full flex-col gap-4 overflow-y-scroll'>

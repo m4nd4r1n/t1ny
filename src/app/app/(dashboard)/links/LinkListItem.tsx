@@ -4,11 +4,11 @@ import { FaRegCalendar } from 'react-icons/fa6';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { Link } from '@/components/Link';
 import { httpScheme } from '@/libs/constants';
+import type { Link as LinkType } from '@/libs/types';
 import { formatDate } from '@/libs/utils';
 
 import LinkCopyButton from './LinkCopyButton';
 import LinkDeleteButton from './LinkDeleteButton';
-import type { Link as LinkType } from './types';
 
 interface LinkListItemProps {
   link: LinkType;
