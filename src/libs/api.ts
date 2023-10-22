@@ -1,5 +1,5 @@
 import { httpScheme } from '@/libs/constants';
-import type { LinkLimits, Links } from '@/libs/types';
+import type { Clicks, LinkLimits, Links, Trending } from '@/libs/types';
 
 export class API {
   private static api = async <T>(path: `/${string}`, init?: RequestInit) => {
@@ -34,4 +34,10 @@ export class API {
     API.api<LinkLimits>(`/link/limits`, { headers });
 
   public static logout = () => API.api('/auth/logout', { method: 'POST' });
+
+  public static getClicks = (headers?: HeadersInit) =>
+    API.api<Clicks>(`/analytics/links/clicks`, { headers });
+
+  public static getTrending = (headers?: HeadersInit) =>
+    API.api<Trending>(`/analytics/links/trending`, { headers });
 }

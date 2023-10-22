@@ -22,3 +22,15 @@ export type LinkLimits = {
   day_limit: number;
   total_limit: number;
 };
+
+export type Clicks = {
+  'Link clicks': number;
+  date: string;
+}[];
+
+export type Trending = {
+  name: string;
+  value: number;
+  href: string;
+  icon: string;
+}[];
