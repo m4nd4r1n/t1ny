@@ -25,3 +25,10 @@ export const mockDataWithIcon = base
     icon: () => icons[index],
   }))
   .sort((a, b) => b.value - a.value);
+
+export const mockDataWithLink = base
+  .map((item) => ({
+    ...item,
+    href: '#',
+  }))
+  .sort((a, b) => b.value - a.value);

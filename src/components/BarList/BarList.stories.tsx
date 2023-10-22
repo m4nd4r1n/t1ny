@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { BarList } from '.';
-import { mockData, mockDataWithIcon } from './mock';
+import { mockData, mockDataWithIcon, mockDataWithLink } from './mock';
 
 const meta = {
   title: 'Components/BarList',
@@ -59,5 +59,12 @@ export const WithIcon: Story = {
   args: {
     ...defaultProps,
     data: mockDataWithIcon,
+  },
+};
+
+export const WithLink: Story = {
+  args: {
+    ...defaultProps,
+    data: mockDataWithLink,
   },
 };
