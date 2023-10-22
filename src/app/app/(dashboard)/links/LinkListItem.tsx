@@ -31,6 +31,7 @@ const LinkListItem: React.FC<LinkListItemProps> = ({
       <div className='flex gap-2'>
         <div className='flex h-12 w-12 items-center justify-center'>
           <ImageWithFallback
+            key={urlId}
             src={targetFavicon}
             fallbackSrc='https://www.notion.so/icons/globe_gray.svg'
             width={32}
