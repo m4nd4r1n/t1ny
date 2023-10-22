@@ -1,6 +1,7 @@
 import { BsArrowReturnRight } from 'react-icons/bs';
 import { FaRegCalendar } from 'react-icons/fa6';
 
+import Card from '@/components/Card';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { Link } from '@/components/Link';
 import { httpScheme } from '@/libs/constants';
@@ -26,7 +27,7 @@ const LinkListItem: React.FC<LinkListItemProps> = ({
   const shortenUrl = `${httpScheme}://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/${urlId}`;
 
   return (
-    <div className='flex flex-col gap-4 rounded-lg border border-default-200 bg-white p-4 shadow-sm lg:flex-row'>
+    <Card className='flex flex-col gap-4 lg:flex-row'>
       <div className='flex gap-2'>
         <div className='flex h-12 w-12 items-center justify-center'>
           <ImageWithFallback
@@ -70,7 +71,7 @@ const LinkListItem: React.FC<LinkListItemProps> = ({
         <LinkCopyButton shortenUrl={shortenUrl} />
         <LinkDeleteButton urlId={urlId} />
       </div>
-    </div>
+    </Card>
   );
 };
 
