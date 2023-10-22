@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants';
 
 export const areaChart = tv({
   slots: {
-    wrapper: 'h-80 w-full',
+    wrapper: 'w-full',
     responsiveContainer: 'h-full w-full',
     gridLine: 'stroke-default-500 stroke-1',
     axis: 'fill-content text-xs',

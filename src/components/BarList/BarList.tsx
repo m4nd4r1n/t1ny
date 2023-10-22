@@ -1,3 +1,4 @@
+import { Link } from '@/components/Link';
 import { colors } from '@/libs/colors';
 
 import { barList } from './BarList.styles';
@@ -7,6 +8,7 @@ type Bar = {
   value: number;
   name: string;
   icon?: React.JSXElementConstructor<unknown>;
+  href?: string;
 };
 
 interface BarListProps {
@@ -53,7 +55,19 @@ const BarList: React.FC<BarListProps> = ({
             >
               <div className={slots.barTextWrapper()}>
                 {Icon && <Icon />}
-                <span className={slots.text()}>{item.name}</span>
+                {item.href ? (
+                  <Link
+                    className={slots.text({
+                      className: 'underline underline-offset-2',
+                    })}
+                    href={item.href}
+                    justify='start'
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <span className={slots.text()}>{item.name}</span>
+                )}
               </div>
             </div>
           );
