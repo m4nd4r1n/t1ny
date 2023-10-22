@@ -6,9 +6,8 @@ import { useState } from 'react';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { Modal } from '@/components/Modal';
-import { createLink } from '@/libs/api';
-
-import type { LinkLimits } from './types';
+import { API } from '@/libs/api';
+import type { LinkLimits } from '@/libs/types';
 
 const CreateNewLink: React.FC<LinkLimits> = ({ day_limit, total_limit }) => {
   const [isOpen, setOpen] = useState(false);
@@ -34,11 +33,7 @@ const CreateNewLink: React.FC<LinkLimits> = ({ day_limit, total_limit }) => {
 
     try {
       const destination = new URL(target.destination.value).toString();
-      const res = await createLink({ destination });
-      if (!res.ok) {
-        const { message } = await res.json();
-        throw new Error(message ?? 'Failed to create a new link');
-      }
+      await API.createLink({ destination });
       close();
       router.refresh();
     } catch (e) {

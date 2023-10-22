@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
-import { deleteLink } from '@/libs/api';
+import { API } from '@/libs/api';
 
 interface LinkDeleteButtonProps {
   urlId: string;
@@ -26,11 +26,7 @@ const LinkDeleteButton: React.FC<LinkDeleteButtonProps> = ({ urlId }) => {
   };
   const onDeleteClick = async () => {
     try {
-      const res = await deleteLink(urlId);
-      if (!res.ok) {
-        const { message } = await res.json();
-        throw new Error(message ?? 'Failed to delete link');
-      }
+      await API.deleteLink(urlId);
       toast.success('Link deleted');
       close();
       router.refresh();

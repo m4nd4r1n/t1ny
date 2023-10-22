@@ -1,22 +1,15 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 
-import { getLinkLimits } from '@/libs/api';
+import { API } from '@/libs/api';
 
 import CreateNewLink from './CreateNewLink';
 import LinkList from './LinkList';
-import type { LinkLimits } from './types';
-
-const fetchLinkLimits = async () => {
-  const res = await getLinkLimits(Object.fromEntries(headers()));
-
-  if (!res.ok) throw new Error('Failed to fetch data');
-
-  return (await res.json()) as LinkLimits;
-};
 
 const LinksPage = async () => {
-  const { day_limit, total_limit } = await fetchLinkLimits();
+  const { day_limit, total_limit } = await API.getLinkLimits(
+    Object.fromEntries(headers()),
+  );
 
   return (
     <div className='flex h-full flex-col gap-8'>
