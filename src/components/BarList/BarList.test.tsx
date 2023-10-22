@@ -29,4 +29,15 @@ describe('BarList component', () => {
 
     expect(icons.length).toBe(mockDataWithIcon.length);
   });
+
+  it('should render correctly with link', () => {
+    const mockDataWithLink = mockData.map((item) => ({
+      ...item,
+      href: '#',
+    }));
+    const { container } = render(<BarList data={mockDataWithLink} />);
+    const links = container.querySelectorAll('a');
+
+    expect(links.length).toBe(mockDataWithLink.length);
+  });
 });
