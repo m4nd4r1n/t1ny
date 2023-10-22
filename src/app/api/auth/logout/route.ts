@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+
 import { withErrorHandler } from '@/libs/handler';
 import { auth, withAuth } from '@/libs/lucia';
 
@@ -7,11 +9,6 @@ export const POST = withErrorHandler(
 
     authRequest.setSession(null);
 
-    return new Response(null, {
-      status: 302,
-      headers: {
-        Location: '/login',
-      },
-    });
+    return NextResponse.json({ message: 'Logged out' });
   }),
 );

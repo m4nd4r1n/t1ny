@@ -6,17 +6,20 @@ import { useState } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 
 import { Button } from '@/components/Button';
-import { logout } from '@/libs/api';
+import { API } from '@/libs/api';
 
 const LogoutButton = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const onButtonClick = () => {
+  const onButtonClick = async () => {
     setLoading(true);
-    logout()
-      .then(() => router.refresh())
-      .finally(() => setLoading(false));
+    try {
+      await API.logout();
+      router.refresh();
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -29,6 +29,7 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['puppeteer-core'],
   },
+  transpilePackages: ['nanoid'],
 };
 
 module.exports = nextConfig;
