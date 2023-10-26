@@ -33,10 +33,15 @@ const AppPage = async () => {
     ),
   }));
 
+  const totalClicks = Intl.NumberFormat().format(
+    visitors.reduce((acc, { 'Link clicks': clicks }) => acc + clicks, 0),
+  );
+
   return (
     <div className='flex flex-col gap-8'>
       <h1 className='text-3xl font-bold'>Dashboard</h1>
       <CardWithTitle title='Total link clicks'>
+        <div className='-mt-2 mb-2 text-3xl font-bold'>{totalClicks}</div>
         <AreaChart
           className='h-48'
           data={visitors}
@@ -66,6 +71,10 @@ const AppPage = async () => {
           </div>
         </CardWithTitle>
         <CardWithTitle title='Trending links'>
+          <div className='mb-2 flex justify-between text-sm font-bold'>
+            <span>Title</span>
+            <span>Clicks</span>
+          </div>
           <BarList data={trendingWithIcon} />
         </CardWithTitle>
       </div>
