@@ -12,7 +12,7 @@ const CardWithTitle: React.FC<CardWithTitleProps> = ({
 }) => {
   return (
     <Card className={className}>
-      <h2 className='mb-8 text-xl font-bold'>{title}</h2>
+      <h2 className='mb-6 text-xl font-bold'>{title}</h2>
       {children}
     </Card>
   );
