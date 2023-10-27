@@ -159,8 +159,24 @@ const InputTypesTemplate = (args: InputProps) => (
   </div>
 );
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const InputSizesTemplate = ({ size: _, ...args }: InputProps) => (
+  <div className='grid grid-cols-1 gap-4'>
+    <Template size='sm' {...args} />
+    <Template size='md' {...args} />
+    <Template size='lg' {...args} />
+  </div>
+);
+
 export const Default: Story = {
   render: Template,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const Sizes: Story = {
+  render: InputSizesTemplate,
   args: {
     ...defaultProps,
   },
