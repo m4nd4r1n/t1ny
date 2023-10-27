@@ -1,6 +1,11 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import {
+  forwardRef,
+  useId,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
-import { nanoid } from 'nanoid';
 import type { VariantProps } from 'tailwind-variants';
 
 import type { PropsWithoutChildren } from '@/libs/types';
@@ -31,7 +36,7 @@ export interface InputProps
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      id = nanoid(),
+      id,
       label,
       isDisabled,
       isInvalid,
@@ -51,9 +56,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
+    const uniqueId = useId();
     const [isFilled, setIsFilled] = useState(false);
     const domRef = useRef<HTMLInputElement>(null);
     useImperativeHandle(ref, () => domRef.current as HTMLInputElement);
+    id = id ?? uniqueId;
 
     const variants = {
       isDisabled,
