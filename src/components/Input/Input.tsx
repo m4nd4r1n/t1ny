@@ -25,6 +25,7 @@ export interface InputProps
   className?: string;
   value?: string;
   name?: string;
+  size?: 'sm' | 'md' | 'lg';
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -45,6 +46,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       'aria-describedby': ariaDescribedBy,
       'aria-labelledby': ariaLabelledBy,
       type = 'text',
+      size,
       ...props
     },
     ref,
@@ -58,6 +60,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       isInvalid,
       isRequired,
       fullWidth,
+      size,
+      hasLabel: !!label,
       isLabelPlaceholder:
         !props.placeholder &&
         !props.defaultValue &&
