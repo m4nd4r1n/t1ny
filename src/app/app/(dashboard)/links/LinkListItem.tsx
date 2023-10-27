@@ -4,7 +4,7 @@ import { FaRegCalendar } from 'react-icons/fa6';
 import Card from '@/components/Card';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { Link } from '@/components/Link';
-import { httpScheme } from '@/libs/constants';
+import { FALLBACK_IMAGE, httpScheme } from '@/libs/constants';
 import type { Link as LinkType } from '@/libs/types';
 import { formatDate } from '@/libs/utils';
 
@@ -33,7 +33,7 @@ const LinkListItem: React.FC<LinkListItemProps> = ({
           <ImageWithFallback
             key={urlId}
             src={targetFavicon}
-            fallbackSrc='https://www.notion.so/icons/globe_gray.svg'
+            fallbackSrc={FALLBACK_IMAGE}
             width={32}
             height={32}
             alt={`Favicon for ${new URL(targetUrl).hostname}`}

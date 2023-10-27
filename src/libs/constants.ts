@@ -5,3 +5,5 @@ export const httpScheme =
 export const BLOCKED_REDIRECT_URL = `/login?error=${encodeURIComponent(
   "You're blocked",
 )}`;
+
+export const FALLBACK_IMAGE = 'https://www.notion.so/icons/globe_gray.svg';
