@@ -83,9 +83,6 @@ const AreaChart = <T extends Record<string, string | number>>({
     autoMinValue ? 'auto' : minValue ?? 0,
     maxValue ?? 'auto',
   ];
-  const ticks = startEndOnly
-    ? [data[0][index], data[data.length - 1][index]]
-    : undefined;
 
   const gridLines = showGridLines ? (
     <CartesianGrid
@@ -150,7 +147,11 @@ const AreaChart = <T extends Record<string, string | number>>({
               hide={!showXAxis}
               dataKey={index}
               tick={{ transform: 'translate(0, 6)' }}
-              ticks={ticks}
+              ticks={
+                startEndOnly
+                  ? [data[0][index], data[data.length - 1][index]]
+                  : undefined
+              }
               fill=''
               stroke=''
               className={slots.axis()}
