@@ -17,13 +17,6 @@ export class API {
     return data as T;
   };
 
-  public static createLink = (body: { destination: string }) =>
-    API.api('/link', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: { 'Content-Type': 'application/json' },
-    });
-
   public static getLinks = (headers?: HeadersInit) =>
     API.api<Links>(`/links`, { headers });
 
