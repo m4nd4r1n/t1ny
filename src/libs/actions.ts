@@ -10,6 +10,41 @@ import { BadRequestError, UnauthorizedError } from '@/libs/error';
 import { auth } from '@/libs/lucia';
 import prisma from '@/libs/prisma';
 
+export const updateUser = async (formData: FormData) => {
+  const authRequest = auth.handleRequest('POST', context);
+  const session = await authRequest.validate();
+  if (!session) throw new UnauthorizedError();
+
+  const name = formData.get('name') as string;
+  const email = formData.get('email') as string;
+  if (!name && !email) throw new BadRequestError('Invalid form data');
+  if (name) {
+    if (name.length > 32) throw new BadRequestError('Name is too long');
+
+    await prisma.user.update({
+      where: { id: session.user.userId },
+      data: { name },
+    });
+  }
+  if (email) {
+    await prisma.user.update({
+      where: { id: session.user.userId },
+      data: { email },
+    });
+  }
+};
+
+export const deleteUser = async () => {
+  const authRequest = auth.handleRequest('POST', context);
+  const session = await authRequest.validate();
+  if (!session) throw new UnauthorizedError();
+
+  await auth.invalidateSession(session.sessionId);
+  authRequest.setSession(null);
+
+  await prisma.user.delete({ where: { id: session.user.userId } });
+};
+
 export const createLink = async (formData: FormData) => {
   const authRequest = auth.handleRequest('POST', context);
   const session = await authRequest.validate();
