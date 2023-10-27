@@ -28,6 +28,7 @@ const nextConfig = {
   },
   experimental: {
     serverComponentsExternalPackages: ['puppeteer-core'],
+    serverActions: true,
   },
   transpilePackages: ['nanoid'],
 };
