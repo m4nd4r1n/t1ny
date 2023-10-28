@@ -37,18 +37,17 @@ interface AppProps extends React.PropsWithChildren {
 }
 
 const App: React.FC<AppProps> = ({ children, isMenu }) => (
-  <div className='max-h-screen max-w-full overflow-y-scroll border border-default'>
+  <div className='max-h-screen w-full overflow-y-scroll border border-default'>
     {children}
-    <div
-      className={`prose min-h-screen-header max-w-full p-4 ${
-        isMenu ? 'sm:ml-60 2xl:ml-96' : ``
-      }`}
-    >
-      <h1>Lorem ipsum dolor sit ame</h1>
-      <div className='text-lg'>
-        {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-          <LoremIpsum key={i} />
-        ))}
+    <div className='flex'>
+      {isMenu && <div className='ml-60 hidden h-full w-0 sm:block'></div>}
+      <div className={`prose mx-auto min-h-screen-header max-w-screen-lg p-4`}>
+        <h1>Lorem ipsum dolor sit ame</h1>
+        <div className='text-lg'>
+          {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+            <LoremIpsum key={i} />
+          ))}
+        </div>
       </div>
     </div>
   </div>
