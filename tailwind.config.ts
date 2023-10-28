@@ -27,11 +27,11 @@ export default withTV({
       minHeight: {
         'screen-header': 'calc(100dvh - 4rem - 1px)',
       },
-      height: {
-        'screen-header': 'calc(100dvh - 4rem - 1px)',
-      },
       maxWidth: {
-        nav: 'calc(1280px + 24rem)',
+        'screen-lg-menu': 'calc(1024px + 15rem)',
+      },
+      maxHeight: {
+        'screen-header': 'calc(100dvh - 4rem - 1px)',
       },
       fontFamily: {
         icon: 'var(--icon-font)',

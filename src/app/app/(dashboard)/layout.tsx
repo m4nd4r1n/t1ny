@@ -1,22 +1,10 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import LogoLink from '@/components/LogoLink';
-import {
-  Navbar,
-  NavbarContent,
-  NavbarItem,
-  NavbarLogo,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
-} from '@/components/Navbar';
 import { BLOCKED_REDIRECT_URL } from '@/libs/constants';
 import { getPageSession } from '@/libs/lucia';
 
-import LogoutButton from './LogoutButton';
-import MenuItemLinks from './MenuItemLinks';
-import Profile from './Profile';
+import Header from './Header';
 
 export const metadata: Metadata = {
   title: 't1ny | Dashboard',
@@ -32,32 +20,16 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
   }
   if (session.user.role === 'BLOCKED') redirect(BLOCKED_REDIRECT_URL);
 
-  const menu = (
-    <NavbarMenu>
-      <MenuItemLinks />
-      <NavbarMenuItem justify='end'>
-        <LogoutButton />
-      </NavbarMenuItem>
-    </NavbarMenu>
-  );
-
   return (
-    <div>
-      <Navbar menu={menu}>
-        <NavbarMenuToggle />
-        <NavbarLogo>
-          <LogoLink />
-        </NavbarLogo>
-        <NavbarContent justify='end'>
-          <NavbarItem>
-            <Profile />
-          </NavbarItem>
-        </NavbarContent>
-      </Navbar>
-      <main className='h-screen-header max-w-screen-xl p-8 sm:ml-60 2xl:ml-96'>
-        {children}
+    <>
+      <Header />
+      <main className='mx-auto flex w-full min-w-0 max-w-screen-lg-menu'>
+        <div className='ml-60 hidden sm:block'></div>
+        <div className='flex max-h-screen-header w-full min-w-0 flex-col gap-8 p-8'>
+          {children}
+        </div>
       </main>
-    </div>
+    </>
   );
 };
 

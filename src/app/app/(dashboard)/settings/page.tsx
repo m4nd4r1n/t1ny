@@ -8,7 +8,7 @@ const SettingsPage = async () => {
   const session = await getPageSession();
 
   return (
-    <div className='flex flex-col gap-8'>
+    <>
       <h1 className='text-3xl font-bold'>Settings</h1>
       <FormCard
         title={NAME.TITLE}
@@ -49,7 +49,7 @@ const SettingsPage = async () => {
         isDanger
         handleSubmit={deleteUser}
       />
-    </div>
+    </>
   );
 };
 
