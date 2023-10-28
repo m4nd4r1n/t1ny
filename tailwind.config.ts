@@ -43,6 +43,10 @@ export default withTV({
       transitionProperty: {
         background: 'background',
       },
+      boxShadow: {
+        'hero-inner':
+          'inset 0 4px 8px rgba(0,0,0,.1), 0 -1px 2px rgba(0,0,0,.2), 0 1px 2px rgba(255,255,255,1)',
+      },
     },
     colors: {
       inherit: colors.inherit,
