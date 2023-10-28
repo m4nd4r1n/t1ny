@@ -43,6 +43,10 @@ export default withTV({
       transitionProperty: {
         background: 'background',
       },
+      backgroundImage: {
+        'gradient-hero':
+          'linear-gradient(to right, rgb(56, 189, 248), rgb(59, 130, 246))',
+      },
       boxShadow: {
         'hero-inner':
           'inset 0 4px 8px rgba(0,0,0,.1), 0 -1px 2px rgba(0,0,0,.2), 0 1px 2px rgba(255,255,255,1)',
