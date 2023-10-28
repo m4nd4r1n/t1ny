@@ -16,8 +16,8 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
       <body
         className={`${iconFont.variable} ${suitVariable.variable} font-suit`}
       >
-        <Toaster richColors position='top-center' closeButton />
         {children}
+        <Toaster richColors position='top-center' closeButton />
       </body>
     </html>
   );

@@ -38,7 +38,7 @@ const AppPage = async () => {
   );
 
   return (
-    <div className='flex flex-col gap-8'>
+    <>
       <h1 className='text-3xl font-bold'>Dashboard</h1>
       <CardWithTitle title='Total link clicks'>
         <div className='-mt-2 mb-2 text-3xl font-bold'>{totalClicks}</div>
@@ -78,7 +78,7 @@ const AppPage = async () => {
           <BarList data={trendingWithIcon} />
         </CardWithTitle>
       </div>
-    </div>
+    </>
   );
 };
 
