@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    display: grid;
+    grid-template-rows: auto 1fr minmax(0, auto);
+  }
+  body,
+  html {
+    min-height: 100dvh;
+    max-height: 100dvh;
+  }
+}
+
 @layer components {
   .ellipsis {
     display: -webkit-box !important;

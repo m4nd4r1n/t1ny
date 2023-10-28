@@ -27,11 +27,11 @@ export default withTV({
       minHeight: {
         'screen-header': 'calc(100dvh - 4rem - 1px)',
       },
-      height: {
-        'screen-header': 'calc(100dvh - 4rem - 1px)',
-      },
       maxWidth: {
-        nav: 'calc(1280px + 24rem)',
+        'screen-lg-menu': 'calc(1024px + 15rem)',
+      },
+      maxHeight: {
+        'screen-header': 'calc(100dvh - 4rem - 1px)',
       },
       fontFamily: {
         icon: 'var(--icon-font)',
@@ -42,6 +42,14 @@ export default withTV({
       },
       transitionProperty: {
         background: 'background',
+      },
+      backgroundImage: {
+        'gradient-hero':
+          'linear-gradient(to right, rgb(56, 189, 248), rgb(59, 130, 246))',
+      },
+      boxShadow: {
+        'hero-inner':
+          'inset 0 4px 8px rgba(0,0,0,.1), 0 -1px 2px rgba(0,0,0,.2), 0 1px 2px rgba(255,255,255,1)',
       },
     },
     colors: {

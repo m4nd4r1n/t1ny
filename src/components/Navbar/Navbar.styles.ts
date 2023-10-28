@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants';
 
 export const navbar = tv({
   slots: {
-    nav: [
+    header: [
       'sticky',
       'inset-x-0',
       'top-0',
@@ -16,8 +16,7 @@ export const navbar = tv({
       'border-b',
       'border-default/10',
     ],
-    wrapper:
-      'relative z-40 flex h-16 w-full max-w-nav flex-nowrap items-center justify-between gap-4 px-6',
+    nav: 'relative z-40 mx-auto flex h-16 w-full max-w-screen-lg flex-nowrap items-center justify-between gap-4 px-6',
     toggle:
       'group flex h-full w-6 items-center justify-center rounded-md outline-none sm:hidden',
     srOnly: 'sr-only',
@@ -96,7 +95,6 @@ export const navbar = tv({
       'p-4',
       'border-r',
       'border-default/10',
-      '2xl:w-96',
     ],
     menuItem: [
       'flex',
@@ -110,5 +108,16 @@ export const navbar = tv({
       'basis-0',
       'flex-nowrap',
     ],
+  },
+  variants: {
+    hasMenu: {
+      true: {
+        header: 'sm:ml-60 sm:w-[calc(100%-15rem)]',
+        menu: 'sm:top-0',
+      },
+    },
+  },
+  defaultVariants: {
+    hasMenu: false,
   },
 });

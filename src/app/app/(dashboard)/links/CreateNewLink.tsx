@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { experimental_useFormStatus as useFormStatus } from 'react-dom';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
@@ -35,6 +36,7 @@ const CreateNewLink: React.FC<LinkLimits> = ({ day_limit, total_limit }) => {
               await createLink(data);
               close();
               router.refresh();
+              toast.success('Link created successfully!');
             } catch (e) {
               if (e instanceof Error) setError(e.message);
             }

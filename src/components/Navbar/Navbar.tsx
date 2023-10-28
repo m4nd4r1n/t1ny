@@ -12,7 +12,7 @@ interface NavbarProps extends Props {
 const Navbar: React.FC<NavbarProps> = ({ children, menu, ...props }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const slots = navbar();
+  const slots = navbar({ hasMenu: !!menu });
 
   const toggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);
@@ -22,9 +22,9 @@ const Navbar: React.FC<NavbarProps> = ({ children, menu, ...props }) => {
 
   return (
     <NavbarContext.Provider value={context}>
-      <nav className={slots.nav()} {...props}>
-        <header className={slots.wrapper()}>{children}</header>
-      </nav>
+      <header className={slots.header()} {...props}>
+        <nav className={slots.nav()}>{children}</nav>
+      </header>
       {menu}
     </NavbarContext.Provider>
   );
