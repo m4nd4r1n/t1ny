@@ -7,9 +7,7 @@ const HomeLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <>
       <Header />
-      <main className='mx-auto h-full w-full max-w-screen-lg p-8'>
-        {children}
-      </main>
+      <main className='mx-auto w-full max-w-screen-lg p-8'>{children}</main>
       <Footer />
     </>
   );
