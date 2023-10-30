@@ -31,7 +31,7 @@ const createAnalytics = async (id: string) => {
   const header = headers();
   const userAgent = header.get('user-agent');
   const ip = header.get('x-real-ip');
-  const country = header.get('x-geoip-countries');
+  const country = header.get('x-geoip-country');
   const parser = new UAParser(userAgent ?? '');
   const { name: browser } = parser.getBrowser();
   const { name: os } = parser.getOS();
