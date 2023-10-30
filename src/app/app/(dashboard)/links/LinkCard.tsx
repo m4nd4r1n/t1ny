@@ -13,9 +13,10 @@ import LinkDeleteButton from './LinkDeleteButton';
 
 interface LinkListItemProps {
   link: LinkType;
+  isTitleLink?: boolean;
 }
 
-const LinkListItem: React.FC<LinkListItemProps> = ({
+const LinkCard: React.FC<LinkListItemProps> = ({
   link: {
     id: urlId,
     target_url: targetUrl,
@@ -23,6 +24,7 @@ const LinkListItem: React.FC<LinkListItemProps> = ({
     target_favicon: targetFavicon,
     target_title: targetTitle,
   },
+  isTitleLink = true,
 }) => {
   const shortenUrl = `${httpScheme}://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/${urlId}`;
 
@@ -40,7 +42,19 @@ const LinkListItem: React.FC<LinkListItemProps> = ({
           />
         </div>
         <div className='flex flex-1 flex-col gap-2'>
-          <h3 className='ellipsis text-lg font-medium'>{targetTitle}</h3>
+          <h3 className='ellipsis text-lg font-medium'>
+            {isTitleLink ? (
+              <Link
+                className='ellipsis text-lg font-medium underline underline-offset-2'
+                href={`/links/detail/${urlId}`}
+                color='default'
+              >
+                {targetTitle}
+              </Link>
+            ) : (
+              targetTitle
+            )}
+          </h3>
           <Link
             className='ellipsis font-medium'
             isExternal
@@ -76,4 +90,4 @@ const LinkListItem: React.FC<LinkListItemProps> = ({
   );
 };
 
-export default LinkListItem;
+export default LinkCard;
