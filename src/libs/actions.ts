@@ -71,19 +71,27 @@ export const createLink = async (formData: FormData) => {
   });
   if (link) throw new BadRequestError('Already exists');
 
+  const DESCRIPTION_SELECTOR = 'meta[name="description"]';
+  const IMAGE_SELECTOR = 'meta[property="og:image"]';
+
   const id = await generateId();
   const browser = await puppeteer.connect({
     browserWSEndpoint: process.env.BROWSER_WS_ENDPOINT,
   });
   const page = await browser.newPage();
   await page.goto(destination);
+  await Promise.race([
+    page.waitForSelector(DESCRIPTION_SELECTOR),
+    page.waitForSelector(IMAGE_SELECTOR),
+    page.waitForNetworkIdle({ idleTime: 1000, timeout: 5000 }),
+  ]);
   const html = await page.content();
   await browser.close();
   const $ = load(html);
   const getMetadata = (selector: string) => $(selector).attr('content');
   const title = $('title').text();
-  const description = getMetadata('meta[name="description"]');
-  const image = getMetadata('meta[property="og:image"]');
+  const description = getMetadata(DESCRIPTION_SELECTOR);
+  const image = getMetadata(IMAGE_SELECTOR);
   const targetDomain = new URL(destination).hostname;
 
   await prisma.$transaction([
