@@ -173,6 +173,7 @@ const AreaChart = <T extends Record<string, string | number>>({
               stroke=''
               className={slots.axis()}
               tickFormatter={valueFormatter}
+              allowDecimals={false}
             />
             {tooltip}
             {legend}
