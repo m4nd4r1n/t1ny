@@ -33,7 +33,8 @@
     "recharts": "^2.9.0",
     "sharp": "^0.32.6",
     "sonner": "^1.0.3",
-    "tailwind-variants": "^0.1.14"
+    "tailwind-variants": "^0.1.14",
+    "ua-parser-js": "^1.0.37"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
@@ -55,6 +56,7 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@types/shelljs": "^0.8.13",
+    "@types/ua-parser-js": "^0.7.38",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "@typescript-eslint/parser": "^6.6.0",
     "autoprefixer": "^10.4.15",

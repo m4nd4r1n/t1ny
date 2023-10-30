@@ -1,5 +1,11 @@
 import { httpScheme } from '@/libs/constants';
-import type { Clicks, LinkLimits, Links, Trending } from '@/libs/types';
+import type {
+  BarList,
+  Clicks,
+  LinkLimits,
+  Links,
+  Trending,
+} from '@/libs/types';
 
 export class API {
   private static api = async <T>(path: `/${string}`, init?: RequestInit) => {
@@ -33,4 +39,19 @@ export class API {
 
   public static getTrending = (headers?: HeadersInit) =>
     API.api<Trending>(`/analytics/links/trending`, { headers });
+
+  public static getClicksById = (id: string, headers?: HeadersInit) =>
+    API.api<Clicks>(`/analytics/links/${id}/clicks`, { headers });
+
+  public static getCountriesById = (id: string, headers?: HeadersInit) =>
+    API.api<BarList>(`/analytics/links/${id}/countries`, { headers });
+
+  public static getDevicesById = (id: string, headers?: HeadersInit) =>
+    API.api<BarList>(`/analytics/links/${id}/devices`, { headers });
+
+  public static getOSsById = (id: string, headers?: HeadersInit) =>
+    API.api<BarList>(`/analytics/links/${id}/oss`, { headers });
+
+  public static getBrowsersById = (id: string, headers?: HeadersInit) =>
+    API.api<BarList>(`/analytics/links/${id}/browsers`, { headers });
 }

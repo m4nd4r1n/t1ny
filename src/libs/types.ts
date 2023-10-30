@@ -11,9 +11,9 @@ export type PropsWithoutChildren<T = HTMLElement> = Omit<Props<T>, 'children'>;
 export type Link = {
   id: string;
   target_url: string;
-  created_at: string;
+  created_at: string | Date;
   target_favicon: string;
-  target_title?: string;
+  target_title?: string | null;
 };
 
 export type Links = Link[];
@@ -28,9 +28,14 @@ export type Clicks = {
   date: string;
 }[];
 
-export type Trending = {
-  name: string;
-  value: number;
+export type Trending = (BarListItem & {
   href: string;
   icon: string;
-}[];
+})[];
+
+export type BarListItem = {
+  name: string;
+  value: number;
+};
+
+export type BarList = BarListItem[];

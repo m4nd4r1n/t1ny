@@ -42,7 +42,11 @@ const MenuItemLinks = () => {
           href={href}
           isBlock
           isFull
-          color={pathname === href ? 'primary' : 'default'}
+          color={
+            pathname === href || (href !== '/' && pathname.startsWith(href))
+              ? 'primary'
+              : 'default'
+          }
           justify='start'
           onClick={onClick}
         >
