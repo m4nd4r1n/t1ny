@@ -78,6 +78,9 @@ model Analytics {
   user_agent String?  @db.Text
   created_at DateTime @default(now())
   country    String?
+  browser    String?
+  os         String?
+  device     String?
 
   url Url @relation(fields: [url_id], references: [id], onDelete: Cascade)
 

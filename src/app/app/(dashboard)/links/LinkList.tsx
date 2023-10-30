@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { API } from '@/libs/api';
 
-import LinkListItem from './LinkListItem';
+import LinkCard from './LinkCard';
 
 const LinkList = async () => {
   const links = await API.getLinks(Object.fromEntries(headers()));
@@ -11,7 +11,7 @@ const LinkList = async () => {
   return (
     <div className='flex h-full flex-col gap-4 overflow-y-scroll'>
       {links.map((link) => (
-        <LinkListItem key={link.id} link={link} />
+        <LinkCard key={link.id} link={link} />
       ))}
       {!!links.length && (
         <div className='flex items-center justify-center gap-4 before:h-px before:w-16 before:border-b before:border-default-500 after:h-px after:w-16 after:border-b after:border-default-500'>

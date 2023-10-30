@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 
+import UAParser from 'ua-parser-js';
+
 import prisma from '@/libs/prisma';
 
 interface RedirectProps {
@@ -29,7 +31,11 @@ const createAnalytics = async (id: string) => {
   const header = headers();
   const userAgent = header.get('user-agent');
   const ip = header.get('x-real-ip');
-  const country = header.get('x-geoip-country');
+  const country = header.get('x-geoip-countries');
+  const parser = new UAParser(userAgent ?? '');
+  const { name: browser } = parser.getBrowser();
+  const { name: os } = parser.getOS();
+  const { model: device } = parser.getDevice();
 
   await Promise.all([
     prisma.url.update({
@@ -42,6 +48,9 @@ const createAnalytics = async (id: string) => {
         user_agent: userAgent,
         country,
         url: { connect: { id } },
+        browser,
+        os,
+        device,
       },
     }),
   ]);

@@ -29,6 +29,7 @@ const LinkDeleteButton: React.FC<LinkDeleteButtonProps> = ({ urlId }) => {
       await API.deleteLink(urlId);
       toast.success('Link deleted');
       close();
+      router.replace('/links');
       router.refresh();
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
