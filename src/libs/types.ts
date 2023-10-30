@@ -28,9 +28,14 @@ export type Clicks = {
   date: string;
 }[];
 
-export type Trending = {
-  name: string;
-  value: number;
+export type Trending = (BarListItem & {
   href: string;
   icon: string;
-}[];
+})[];
+
+export type BarListItem = {
+  name: string;
+  value: number;
+};
+
+export type BarList = BarListItem[];
