@@ -1,7 +1,7 @@
 <div align="center">
   <a href="https://t1ny.kr">
     <picture>
-      <img alt='' src="https://github.com/m4nd4r1n/t1ny/assets/96206089/aee1a5dc-91da-44fb-90ff-b01ae77fbb47" height="128">
+      <img alt='' src="https://github.com/m4nd4r1n/t1ny/assets/96206089/0ad20233-dbef-48fd-a82b-6bf2b481d952" height="128">
     </picture>
     <h1 align="center">t1ny</h1>
   </a>
