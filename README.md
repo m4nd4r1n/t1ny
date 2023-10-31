@@ -13,8 +13,8 @@ Free URL shortener built with [Next.js](https://github.com/vercel/next.js) and [
 
   <img alt='' src="https://github.com/m4nd4r1n/t1ny/actions/workflows/ci.yml/badge.svg">
   <img alt='' src="https://img.shields.io/github/v/release/m4nd4r1n/t1ny">
-  <img alt='' src="https://img.shields.io/github/deployments/m4nd4r1n/t1ny/Storybook">
-  <img alt='' src="https://img.shields.io/github/deployments/m4nd4r1n/t1ny/Production">
+  <img alt='' src="https://img.shields.io/github/deployments/m4nd4r1n/t1ny/Storybook?label=Storybook">
+  <img alt='' src="https://img.shields.io/github/deployments/m4nd4r1n/t1ny/Production?label=Production">
 </div>
 
 ## Features
@@ -28,19 +28,19 @@ Free URL shortener built with [Next.js](https://github.com/vercel/next.js) and [
 
 ### Dashboard
 
-![dashboard](https://github.com/m4nd4r1n/t1ny/assets/96206089/90b4655c-ef1b-4000-88ed-1441df22bbfc)
+![dashboard](https://github.com/m4nd4r1n/t1ny/assets/96206089/dcf4e5e4-2ec5-4974-953f-44c5c5e8dba1)
 
 ### Links
 
-![links](https://github.com/m4nd4r1n/t1ny/assets/96206089/2f026e59-0841-427a-bf19-659d7c48009b)
+![links](https://github.com/m4nd4r1n/t1ny/assets/96206089/598cd2fa-9ed6-4e21-93df-ee0457a0ce6b)
 
 ### Links detail
 
-![links detail](https://github.com/m4nd4r1n/t1ny/assets/96206089/71f967ef-07e0-4bdd-9c84-942c7c0286de)
+![links detail](https://github.com/m4nd4r1n/t1ny/assets/96206089/fbd4ddd4-2516-4d24-88e7-e79eed34bab8)
 
 ## Architecture
 
-<img width="896" alt="architecture" src="https://github.com/m4nd4r1n/t1ny/assets/96206089/3117f8e7-5953-4747-a03c-bf2f33035e09">
+<img width="896" alt="architecture" src="https://github.com/m4nd4r1n/t1ny/assets/96206089/665a41a8-7a4d-4aac-a3ec-7ae4b13c537f">
 
 ## How to run
 
