@@ -1,1 +1,5 @@
-export { default as ChartTooltip } from './ChartTooltip';
+export {
+  default as ChartTooltip,
+  ChartTooltipRow,
+  ChartTooltipWrapper,
+} from './ChartTooltip';

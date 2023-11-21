@@ -13,7 +13,9 @@ import {
 } from 'recharts';
 import type { AxisDomain } from 'recharts/types/util/types';
 
+import { NoData } from '@/components/NoData';
 import { colors } from '@/libs/colors';
+import type { ValueFormatter } from '@/libs/types';
 
 import { ChartLegend } from '../ChartLegend';
 import { ChartTooltip } from '../ChartTooltip';
@@ -49,7 +51,7 @@ interface AreaChartProps<T> {
   animationDuration?: number;
   /** @default false */
   showAnimation?: boolean;
-  valueFormatter?: (value: number) => string;
+  valueFormatter?: ValueFormatter;
   className?: string;
 }
 
@@ -76,7 +78,7 @@ const AreaChart = <T extends Record<string, string | number>>({
   const slots = areaChart();
   const categoryColorMap = new Map<string, string>();
   categories.forEach((category, idx) => {
-    categoryColorMap.set(category, colors[idx]);
+    categoryColorMap.set(category, colors[idx % colors.length]);
   });
 
   const yAxisDomain: AxisDomain = [
@@ -238,9 +240,7 @@ const AreaChart = <T extends Record<string, string | number>>({
             ))}
           </ReChartsAreaChart>
         ) : (
-          <div className={slots.noDataWrapper()}>
-            <p className={slots.noDataText()}>No data to display</p>
-          </div>
+          <NoData />
         )}
       </ResponsiveContainer>
     </div>

@@ -4,13 +4,17 @@ import type {
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
 
+import type { ValueFormatter } from '@/libs/types';
+
 import { chartTooltip } from './ChartTooltip.styles';
 
 interface ChartTooltipProps<TValue extends ValueType, TName extends NameType>
   extends TooltipProps<TValue, TName> {
   categoryColorMap: Map<string, string>;
-  valueFormatter: (value: number) => string;
+  valueFormatter: ValueFormatter;
 }
+
+const slots = chartTooltip();
 
 const ChartTooltip = <TValue extends ValueType, TName extends NameType>({
   active,
@@ -21,36 +25,53 @@ const ChartTooltip = <TValue extends ValueType, TName extends NameType>({
 }: ChartTooltipProps<TValue, TName>) => {
   if (!active || !payload) return null;
 
-  const slots = chartTooltip();
-
   return (
-    <div className={slots.wrapper()}>
+    <ChartTooltipWrapper>
       <div className={slots.labelWrapper()}>
         <p className={slots.label()}>{label}</p>
       </div>
       <div className={slots.rowBox()}>
         {payload.map(({ value, name }, index) => (
-          <div key={`id-${index}`} className={slots.rowWrapper()}>
-            <div className={slots.rowNameWrapper()}>
-              {name && (
-                <span
-                  className={slots.rowNameIcon({
-                    className: `bg-${categoryColorMap.get(`${name}`)}`,
-                  })}
-                />
-              )}
-              <p className={slots.rowName()}>{name}</p>
-            </div>
-            {value && (
-              <p className={slots.rowValue()}>
-                {valueFormatter(Number(value))}
-              </p>
-            )}
-          </div>
+          <ChartTooltipRow
+            key={`id-${index}`}
+            value={valueFormatter(Number(value))}
+            name={`${name}`}
+            color={categoryColorMap.get(`${name}`) ?? ''}
+          />
         ))}
       </div>
-    </div>
+    </ChartTooltipWrapper>
   );
 };
+
+interface ChartTooltipRowProps {
+  name: string;
+  value: string;
+  color: string;
+}
+
+export const ChartTooltipRow: React.FC<ChartTooltipRowProps> = ({
+  name,
+  value,
+  color,
+}) => (
+  <div className={slots.rowWrapper()}>
+    <div className={slots.rowNameWrapper()}>
+      {name && (
+        <span
+          className={slots.rowNameIcon({
+            className: `bg-${color}`,
+          })}
+        />
+      )}
+      <p className={slots.rowName()}>{name}</p>
+    </div>
+    <p className={slots.rowValue()}>{value}</p>
+  </div>
+);
+
+export const ChartTooltipWrapper: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => <div className={slots.wrapper()}>{children}</div>;
 
 export default ChartTooltip;
