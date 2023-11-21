@@ -13,6 +13,7 @@ import {
 } from 'recharts';
 import type { AxisDomain } from 'recharts/types/util/types';
 
+import { NoData } from '@/components/NoData';
 import { colors } from '@/libs/colors';
 import type { ValueFormatter } from '@/libs/types';
 
@@ -239,9 +240,7 @@ const AreaChart = <T extends Record<string, string | number>>({
             ))}
           </ReChartsAreaChart>
         ) : (
-          <div className={slots.noDataWrapper()}>
-            <p className={slots.noDataText()}>No data to display</p>
-          </div>
+          <NoData />
         )}
       </ResponsiveContainer>
     </div>
