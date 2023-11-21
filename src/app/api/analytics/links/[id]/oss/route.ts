@@ -14,7 +14,6 @@ export const GET = withErrorHandler(
     const { id } = params;
 
     const result = await prisma.analytics.groupBy({
-      take: 5,
       by: ['os'],
       _count: {
         _all: true,

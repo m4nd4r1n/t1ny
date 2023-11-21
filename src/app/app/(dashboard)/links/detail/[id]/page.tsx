@@ -1,8 +1,8 @@
 import { headers } from 'next/headers';
 
 import { AreaChart } from '@/components/AreaChart';
-import { BarList } from '@/components/BarList';
 import CardWithTitle from '@/components/CardWithTitle';
+import { DonutChart } from '@/components/DonutChart';
 import { Link } from '@/components/Link';
 import { API } from '@/libs/api';
 import prisma from '@/libs/prisma';
@@ -54,11 +54,13 @@ const LinkDetailPage = async ({ params: { id } }: LinkDetailPageProps) => {
       <div className='flex flex-col gap-8 pb-8 lg:grid lg:grid-cols-2'>
         {cardLists.map(({ title, tag, data }) => (
           <CardWithTitle key={title} title={title}>
-            <div className='mb-2 flex justify-between text-sm font-bold'>
-              <span>{tag}</span>
-              <span>Clicks</span>
-            </div>
-            <BarList data={data} />
+            <DonutChart
+              className='h-40'
+              data={data}
+              category='value'
+              index='name'
+              label={tag}
+            />
           </CardWithTitle>
         ))}
       </div>
