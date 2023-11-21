@@ -78,7 +78,7 @@ const AreaChart = <T extends Record<string, string | number>>({
   const slots = areaChart();
   const categoryColorMap = new Map<string, string>();
   categories.forEach((category, idx) => {
-    categoryColorMap.set(category, colors[idx]);
+    categoryColorMap.set(category, colors[idx % colors.length]);
   });
 
   const yAxisDomain: AxisDomain = [
