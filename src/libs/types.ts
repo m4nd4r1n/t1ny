@@ -39,3 +39,5 @@ export type BarListItem = {
 };
 
 export type BarList = BarListItem[];
+
+export type ValueFormatter = (value: number) => string;

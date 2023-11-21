@@ -4,12 +4,14 @@ import type {
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
 
+import type { ValueFormatter } from '@/libs/types';
+
 import { chartTooltip } from './ChartTooltip.styles';
 
 interface ChartTooltipProps<TValue extends ValueType, TName extends NameType>
   extends TooltipProps<TValue, TName> {
   categoryColorMap: Map<string, string>;
-  valueFormatter: (value: number) => string;
+  valueFormatter: ValueFormatter;
 }
 
 const ChartTooltip = <TValue extends ValueType, TName extends NameType>({

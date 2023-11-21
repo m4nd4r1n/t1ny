@@ -14,6 +14,7 @@ import {
 import type { AxisDomain } from 'recharts/types/util/types';
 
 import { colors } from '@/libs/colors';
+import type { ValueFormatter } from '@/libs/types';
 
 import { ChartLegend } from '../ChartLegend';
 import { ChartTooltip } from '../ChartTooltip';
@@ -49,7 +50,7 @@ interface AreaChartProps<T> {
   animationDuration?: number;
   /** @default false */
   showAnimation?: boolean;
-  valueFormatter?: (value: number) => string;
+  valueFormatter?: ValueFormatter;
   className?: string;
 }
 

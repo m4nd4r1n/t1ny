@@ -1,5 +1,6 @@
 import { Link } from '@/components/Link';
 import { colors } from '@/libs/colors';
+import type { ValueFormatter } from '@/libs/types';
 
 import { barList } from './BarList.styles';
 
@@ -16,7 +17,7 @@ interface BarListProps {
   /**
    * @default (value) => `${value}`
    */
-  valueFormatter?: (value: number) => string;
+  valueFormatter?: ValueFormatter;
   /**
    * @default false
    */
