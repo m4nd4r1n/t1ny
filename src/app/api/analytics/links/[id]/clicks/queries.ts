@@ -4,13 +4,13 @@ export const getClicksByMonthWithId = (
   userId: string,
   id: string,
 ) => Prisma.sql`
-  SELECT 
+  SELECT
     COUNT(A.id) as count,
-    DATE_FORMAT(A.created_at, '%Y-%m') AS date
-  FROM 
-    Analytics AS A 
-    JOIN Url AS B ON A.url_id = B.id
-    JOIN User AS C ON B.user_id = C.id
+    to_char(A.created_at, 'yyyy-mm') AS date
+  FROM
+    "Analytics" AS A
+    JOIN "Url" AS B ON A.url_id = B.id
+    JOIN "User" AS C ON B.user_id = C.id
   WHERE
     B.id = ${id} AND
     C.id = ${userId}
@@ -21,13 +21,13 @@ export const getClicksByMonthWithId = (
 `;
 
 export const getClicksByDayWithId = (userId: string, id: string) => Prisma.sql`
-  SELECT 
+  SELECT
     COUNT(A.id) as count,
-    DATE_FORMAT(A.created_at, '%Y-%m-%d') AS date
-  FROM 
-    Analytics AS A 
-    JOIN Url AS B ON A.url_id = B.id
-    JOIN User AS C ON B.user_id = C.id
+    to_char(A.created_at, 'yyyy-mm-dd') AS date
+  FROM
+    "Analytics" AS A
+    JOIN "Url" AS B ON A.url_id = B.id
+    JOIN "User" AS C ON B.user_id = C.id
   WHERE
     B.id = ${id} AND
     C.id = ${userId}

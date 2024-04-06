@@ -20,7 +20,7 @@ export const auth = lucia({
   sessionCookie: {
     expires: false,
     attributes: {
-      domain: `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN?.split(':')[0]}`,
+      domain: `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
     },
   },
   adapter: prisma(client),

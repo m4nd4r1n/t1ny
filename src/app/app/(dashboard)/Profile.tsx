@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
+import { LOGIN_PATH } from '@/libs/constants';
 import { getPageSession } from '@/libs/lucia';
 
 const Profile = async () => {
   const session = await getPageSession();
-  if (!session) redirect('/login');
+  if (!session) redirect(LOGIN_PATH);
 
   return (
     <div className='flex w-full flex-1 items-center gap-2 rounded-lg px-2 py-1.5'>

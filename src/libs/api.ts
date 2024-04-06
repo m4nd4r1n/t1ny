@@ -1,4 +1,4 @@
-import { httpScheme } from '@/libs/constants';
+import { APP_URL } from '@/libs/constants';
 import type {
   BarList,
   Clicks,
@@ -10,11 +10,12 @@ import type {
 export class API {
   private static api = async <T>(path: `/${string}`, init?: RequestInit) => {
     const isServer = typeof window === 'undefined';
+    const { NEXT_PUBLIC_HTTP_SCHEME, HOSTNAME, PORT } = process.env;
     const url = isServer
-      ? `${process.env.NEXT_PUBLIC_HTTP_SCHEME || 'http'}://${
-          process.env.HOSTNAME
-        }:3000/api${path}`
-      : `${httpScheme}://app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/api${path}`;
+      ? `${NEXT_PUBLIC_HTTP_SCHEME || 'http'}://${HOSTNAME || '127.0.0.1'}:${
+          PORT || 3000
+        }/api${path}`
+      : `${APP_URL}/api${path}`;
     const res = await fetch(url, init);
     const data = await res.json();
 
