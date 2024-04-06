@@ -39,7 +39,7 @@ const links = [
     text: 'Privacy Policy',
   },
   {
-    href: 'mailto:admin@t1ny.kr',
+    href: process.env.NEXT_PUBLIC_CONTACT,
     text: 'Contact Us',
   },
 ];

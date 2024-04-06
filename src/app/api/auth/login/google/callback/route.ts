@@ -2,7 +2,7 @@ import * as context from 'next/headers';
 import { cookies, headers } from 'next/headers';
 import type { NextRequest } from 'next/server';
 
-import { BLOCKED_REDIRECT_URL } from '@/libs/constants';
+import { BLOCKED_PATH, HOME_PATH } from '@/libs/constants';
 import { BadRequestError } from '@/libs/error';
 import { withErrorHandler } from '@/libs/handler';
 import { auth, googleAuth } from '@/libs/lucia';
@@ -11,7 +11,10 @@ export const GET = withErrorHandler(async (request: NextRequest) => {
   const authRequest = auth.handleRequest(request.method, context);
   const session = await authRequest.validate();
   if (session) {
-    return new Response(null, { status: 302, headers: { Location: '/' } });
+    return new Response(null, {
+      status: 302,
+      headers: { Location: HOME_PATH },
+    });
   }
 
   const storedState = cookies().get('google_oauth_state')?.value;
@@ -43,7 +46,7 @@ export const GET = withErrorHandler(async (request: NextRequest) => {
   if (user.role === 'BLOCKED') {
     return new Response(null, {
       status: 302,
-      headers: { Location: BLOCKED_REDIRECT_URL },
+      headers: { Location: BLOCKED_PATH },
     });
   }
 
@@ -57,5 +60,5 @@ export const GET = withErrorHandler(async (request: NextRequest) => {
   });
   newAuthRequest.setSession(newSession);
 
-  return new Response(null, { status: 302, headers: { Location: '/' } });
+  return new Response(null, { status: 302, headers: { Location: HOME_PATH } });
 });

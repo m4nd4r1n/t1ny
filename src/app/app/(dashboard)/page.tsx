@@ -6,7 +6,7 @@ import CardWithTitle from '@/components/CardWithTitle';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { ProgressBar } from '@/components/ProgressBar';
 import { API } from '@/libs/api';
-import { FALLBACK_IMAGE } from '@/libs/constants';
+import { FALLBACK_IMAGE_URL } from '@/libs/constants';
 
 const DAY_MAX = 20;
 const TOTAL_MAX = 500;
@@ -26,7 +26,7 @@ const AppPage = async () => {
         className='shrink-0 rounded-full'
         src={item.icon}
         alt='trending icon'
-        fallbackSrc={FALLBACK_IMAGE}
+        fallbackSrc={FALLBACK_IMAGE_URL}
         width={20}
         height={20}
       />

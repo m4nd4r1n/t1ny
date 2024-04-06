@@ -5,9 +5,8 @@ import {
   NavbarItem,
   NavbarLogo,
 } from '@/components/Navbar';
+import { APP_URL, LOGIN_URL } from '@/libs/constants';
 import { getPageSession } from '@/libs/lucia';
-
-import { APP_URL, LOGIN_URL } from './constants';
 
 const Header = async () => {
   const session = await getPageSession();

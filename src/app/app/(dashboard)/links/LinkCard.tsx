@@ -4,7 +4,7 @@ import { FaRegCalendar } from 'react-icons/fa6';
 import Card from '@/components/Card';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { Link } from '@/components/Link';
-import { FALLBACK_IMAGE, httpScheme } from '@/libs/constants';
+import { FALLBACK_IMAGE_URL, ROOT_URL } from '@/libs/constants';
 import type { Link as LinkType } from '@/libs/types';
 import { formatDate } from '@/libs/utils';
 
@@ -26,7 +26,7 @@ const LinkCard: React.FC<LinkListItemProps> = ({
   },
   isTitleLink = true,
 }) => {
-  const shortenUrl = `${httpScheme}://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/${urlId}`;
+  const shortenUrl = `${ROOT_URL}/${urlId}`;
 
   return (
     <Card className='flex flex-col gap-4 lg:flex-row'>
@@ -35,7 +35,7 @@ const LinkCard: React.FC<LinkListItemProps> = ({
           <ImageWithFallback
             key={urlId}
             src={targetFavicon}
-            fallbackSrc={FALLBACK_IMAGE}
+            fallbackSrc={FALLBACK_IMAGE_URL}
             width={32}
             height={32}
             alt={`Favicon for ${new URL(targetUrl).hostname}`}

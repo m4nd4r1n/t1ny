@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { BLOCKED_REDIRECT_URL } from '@/libs/constants';
+import { BLOCKED_PATH, LOGIN_PATH } from '@/libs/constants';
 import { getPageSession } from '@/libs/lucia';
 
 import Header from './Header';
@@ -16,9 +16,9 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
   const session = await getPageSession();
 
   if (!session) {
-    redirect('/login');
+    redirect(LOGIN_PATH);
   }
-  if (session.user.role === 'BLOCKED') redirect(BLOCKED_REDIRECT_URL);
+  if (session.user.role === 'BLOCKED') redirect(BLOCKED_PATH);
 
   return (
     <>

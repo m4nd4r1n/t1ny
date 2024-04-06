@@ -12,6 +12,8 @@ const HeroImage = () => {
           height={582}
           sizes='100vw'
           priority
+          placeholder='blur'
+          blurDataURL='/dashboard.webp'
         />
       </div>
       <div className='z-3 absolute inset-4 rounded shadow-hero-inner'></div>

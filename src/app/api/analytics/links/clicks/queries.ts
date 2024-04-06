@@ -1,13 +1,13 @@
 import { Prisma } from '@prisma/client';
 
 export const getClicksByMonth = (userId: string) => Prisma.sql`
-  SELECT 
+  SELECT
     COUNT(A.id) as count,
-    DATE_FORMAT(A.created_at, '%Y-%m') AS date
-  FROM 
-    Analytics AS A 
-    JOIN Url AS B ON A.url_id = B.id
-    JOIN User AS C ON B.user_id = C.id
+    to_char(A.created_at, 'yyyy-mm') AS date
+  FROM
+    "Analytics" AS A
+    JOIN "Url" AS B ON A.url_id = B.id
+    JOIN "User" AS C ON B.user_id = C.id
   WHERE
     C.id = ${userId}
   GROUP BY
@@ -17,13 +17,13 @@ export const getClicksByMonth = (userId: string) => Prisma.sql`
 `;
 
 export const getClicksByDay = (userId: string) => Prisma.sql`
-  SELECT 
+  SELECT
     COUNT(A.id) as count,
-    DATE_FORMAT(A.created_at, '%Y-%m-%d') AS date
-  FROM 
-    Analytics AS A 
-    JOIN Url AS B ON A.url_id = B.id
-    JOIN User AS C ON B.user_id = C.id
+    to_char(A.created_at, 'yyyy-mm-dd') AS date
+  FROM
+    "Analytics" AS A
+    JOIN "Url" AS B ON A.url_id = B.id
+    JOIN "User" AS C ON B.user_id = C.id
   WHERE
     C.id = ${userId}
   GROUP BY
