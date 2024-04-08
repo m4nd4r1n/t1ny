@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { experimental_useFormStatus as useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/Button';
