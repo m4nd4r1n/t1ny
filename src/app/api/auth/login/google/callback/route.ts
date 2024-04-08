@@ -2,10 +2,10 @@ import * as context from 'next/headers';
 import { cookies, headers } from 'next/headers';
 import type { NextRequest } from 'next/server';
 
-import { BLOCKED_PATH, HOME_PATH } from '@/libs/constants';
-import { BadRequestError } from '@/libs/error';
+import { BLOCKED_PATH, HOME_PATH } from '@/constants/urls';
 import { withErrorHandler } from '@/libs/handler';
 import { auth, googleAuth } from '@/libs/lucia';
+import { BadRequestError } from '@/utils/error';
 
 export const GET = withErrorHandler(async (request: NextRequest) => {
   const authRequest = auth.handleRequest(request.method, context);

@@ -8,8 +8,8 @@ import {
 } from 'recharts';
 
 import { NoData } from '@/components/NoData';
-import { colors } from '@/libs/colors';
-import type { ValueFormatter } from '@/libs/types';
+import { colors } from '@/constants/colors';
+import type { ValueFormatter } from '@/types';
 
 import { donutChart } from './DonutChart.styles';
 import DonutChartTooltip from './DonutChartTooltip';

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { BLOCKED_PATH, LOGIN_PATH } from '@/libs/constants';
+import { BLOCKED_PATH, LOGIN_PATH } from '@/constants/urls';
 import { getPageSession } from '@/libs/lucia';
 
 import Header from './Header';

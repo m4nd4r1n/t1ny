@@ -5,7 +5,7 @@ import {
   NavbarItem,
   NavbarLogo,
 } from '@/components/Navbar';
-import { APP_URL, LOGIN_URL } from '@/libs/constants';
+import { APP_URL, LOGIN_URL } from '@/constants/urls';
 import { getPageSession } from '@/libs/lucia';
 
 const Header = async () => {

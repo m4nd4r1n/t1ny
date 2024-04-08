@@ -1,4 +1,4 @@
-export const HTTP_SCHEME =
+const HTTP_SCHEME =
   process.env.NEXT_PUBLIC_HTTP_SCHEME ||
   (process.env.NODE_ENV === 'development' ? 'http' : 'https');
 

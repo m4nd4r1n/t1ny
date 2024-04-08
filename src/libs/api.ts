@@ -1,11 +1,5 @@
-import { APP_URL } from '@/libs/constants';
-import type {
-  BarList,
-  Clicks,
-  LinkLimits,
-  Links,
-  Trending,
-} from '@/libs/types';
+import { APP_URL } from '@/constants/urls';
+import type { BarList, Clicks, LinkLimits, Links, Trending } from '@/types';
 
 export class API {
   private static api = async <T>(path: `/${string}`, init?: RequestInit) => {

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
-import { LOGIN_PATH } from '@/libs/constants';
+import { LOGIN_PATH } from '@/constants/urls';
 import { getPageSession } from '@/libs/lucia';
 
 const Profile = async () => {

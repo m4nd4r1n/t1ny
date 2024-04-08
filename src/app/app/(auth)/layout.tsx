@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { HOME_PATH } from '@/libs/constants';
+import { HOME_PATH } from '@/constants/urls';
 import { getPageSession } from '@/libs/lucia';
 
 export const metadata: Metadata = {

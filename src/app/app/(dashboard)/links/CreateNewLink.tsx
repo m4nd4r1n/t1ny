@@ -10,7 +10,7 @@ import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { Modal } from '@/components/Modal';
 import { createLink } from '@/libs/actions';
-import type { LinkLimits } from '@/libs/types';
+import type { LinkLimits } from '@/types';
 
 const CreateNewLink: React.FC<LinkLimits> = ({ day_limit, total_limit }) => {
   const [isOpen, setOpen] = useState(false);

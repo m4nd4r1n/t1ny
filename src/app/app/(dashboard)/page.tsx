@@ -5,8 +5,8 @@ import { BarList } from '@/components/BarList';
 import CardWithTitle from '@/components/CardWithTitle';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { ProgressBar } from '@/components/ProgressBar';
+import { FALLBACK_IMAGE_URL } from '@/constants/urls';
 import { API } from '@/libs/api';
-import { FALLBACK_IMAGE_URL } from '@/libs/constants';
 
 const DAY_MAX = 20;
 const TOTAL_MAX = 500;

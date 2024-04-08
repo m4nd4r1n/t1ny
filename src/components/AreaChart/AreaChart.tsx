@@ -14,8 +14,8 @@ import {
 import type { AxisDomain } from 'recharts/types/util/types';
 
 import { NoData } from '@/components/NoData';
-import { colors } from '@/libs/colors';
-import type { ValueFormatter } from '@/libs/types';
+import { colors } from '@/constants/colors';
+import type { ValueFormatter } from '@/types';
 
 import { ChartLegend } from '../ChartLegend';
 import { ChartTooltip } from '../ChartTooltip';

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { ROOT_DOMAIN } from '@/libs/constants';
+import { ROOT_DOMAIN } from '@/constants/urls';
 
 export const config = {
   matcher: ['/((?!api/|_next/|_static/|_vercel|monitoring|[\\w-]+\\.\\w+).*)'],

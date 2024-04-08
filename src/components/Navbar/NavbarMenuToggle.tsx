@@ -1,4 +1,4 @@
-import type { PropsWithoutChildren } from '@/libs/types';
+import type { PropsWithoutChildren } from '@/types';
 
 import { useNavBarContext } from './context';
 

@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 
-import { BadRequestError } from '@/libs/error';
 import { withErrorHandler } from '@/libs/handler';
 import { withAuth } from '@/libs/lucia';
 import prisma from '@/libs/prisma';
+import { BadRequestError } from '@/utils/error';
 
 type Params = {
   id: string;

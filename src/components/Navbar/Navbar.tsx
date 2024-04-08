@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { Props } from '@/libs/types';
+import type { Props } from '@/types';
 
 import { navbar } from './Navbar.styles';
 import { NavbarContext } from './context';

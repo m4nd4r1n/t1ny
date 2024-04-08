@@ -1,4 +1,4 @@
-import { colors as defaultColors } from '@/libs/colors';
+import { colors as defaultColors } from '@/constants/colors';
 
 import { chartLegend } from './ChartLegend.styles';
 

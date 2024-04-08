@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 import { OAuthRequestError } from '@lucia-auth/oauth';
 
-import { HttpError } from '@/libs/error';
+import { HttpError } from '@/utils/error';
 
 type WithErrorHandler<T> = (
   request: NextRequest,

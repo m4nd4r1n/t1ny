@@ -4,9 +4,9 @@ import { FaRegCalendar } from 'react-icons/fa6';
 import Card from '@/components/Card';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import { Link } from '@/components/Link';
-import { FALLBACK_IMAGE_URL, ROOT_URL } from '@/libs/constants';
-import type { Link as LinkType } from '@/libs/types';
-import { formatDate } from '@/libs/utils';
+import { FALLBACK_IMAGE_URL, ROOT_URL } from '@/constants/urls';
+import type { Link as LinkType } from '@/types';
+import { formatDate } from '@/utils/date';
 
 import LinkCopyButton from './LinkCopyButton';
 import LinkDeleteButton from './LinkDeleteButton';

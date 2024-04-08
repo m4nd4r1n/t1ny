@@ -4,7 +4,7 @@ import type {
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
 
-import type { ValueFormatter } from '@/libs/types';
+import type { ValueFormatter } from '@/types';
 
 import { chartTooltip } from './ChartTooltip.styles';
 

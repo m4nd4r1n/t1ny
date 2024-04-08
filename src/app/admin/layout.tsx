@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { APP_URL } from '@/libs/constants';
+import { APP_URL } from '@/constants/urls';
 import { getPageSession } from '@/libs/lucia';
 
 const AdminLayout: React.FC<React.PropsWithChildren> = async ({ children }) => {

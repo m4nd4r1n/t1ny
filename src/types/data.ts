@@ -1,13 +1,3 @@
-type DataAttributes = {
-  [dataAttr: `data-${string}`]: string;
-};
-
-export type Props<T = HTMLElement> = React.DOMAttributes<T> &
-  React.AriaAttributes &
-  DataAttributes;
-
-export type PropsWithoutChildren<T = HTMLElement> = Omit<Props<T>, 'children'>;
-
 export type Link = {
   id: string;
   target_url: string;
@@ -39,5 +29,3 @@ export type BarListItem = {
 };
 
 export type BarList = BarListItem[];
-
-export type ValueFormatter = (value: number) => string;

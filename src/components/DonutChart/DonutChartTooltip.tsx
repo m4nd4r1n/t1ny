@@ -8,7 +8,7 @@ import {
   ChartTooltipRow,
   ChartTooltipWrapper,
 } from '@/components/ChartTooltip';
-import type { ValueFormatter } from '@/libs/types';
+import type { ValueFormatter } from '@/types';
 
 interface DonutChartTooltipProps {
   active?: boolean;

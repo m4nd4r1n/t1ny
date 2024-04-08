@@ -17,4 +17,4 @@ export const colors = Object.freeze([
   'pink',
   'blue',
   'fuchsia',
-]);
+] as const);

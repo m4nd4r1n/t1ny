@@ -8,7 +8,7 @@ import {
 
 import type { VariantProps } from 'tailwind-variants';
 
-import type { PropsWithoutChildren } from '@/libs/types';
+import type { PropsWithoutChildren } from '@/types';
 
 import { input } from './Input.styles';
 

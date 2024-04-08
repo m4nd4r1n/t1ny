@@ -8,7 +8,7 @@ import { type AuthRequest, lucia } from 'lucia';
 import { nextjs_future } from 'lucia/middleware';
 import 'lucia/polyfill/node';
 
-import { ForbiddenError, UnauthorizedError } from '@/libs/error';
+import { ForbiddenError, UnauthorizedError } from '@/utils/error';
 
 import client from './prisma';
 

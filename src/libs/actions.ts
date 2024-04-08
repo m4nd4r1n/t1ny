@@ -6,9 +6,9 @@ import { load } from 'cheerio';
 import { customAlphabet } from 'nanoid';
 import puppeteer from 'puppeteer-core';
 
-import { BadRequestError, UnauthorizedError } from '@/libs/error';
 import { auth } from '@/libs/lucia';
 import prisma from '@/libs/prisma';
+import { BadRequestError, UnauthorizedError } from '@/utils/error';
 
 export const updateUser = async (formData: FormData) => {
   const authRequest = auth.handleRequest('POST', context);

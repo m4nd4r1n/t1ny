@@ -1,5 +1,5 @@
 import { Link } from '@/components/Link';
-import { LOGIN_URL } from '@/libs/constants';
+import { LOGIN_URL } from '@/constants/urls';
 
 import HeroImage from './HeroImage';
 import HeroText from './HeroText';
