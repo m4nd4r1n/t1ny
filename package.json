@@ -31,7 +31,7 @@
     "react-dom": "^18",
     "react-icons": "^4.12.0",
     "react-lorem-ipsum": "^1.4.10",
-    "recharts": "^2.12.4",
+    "recharts": "^2.9.0",
     "sharp": "^0.32.6",
     "sonner": "^1.4.41",
     "tailwind-variants": "^0.1.20",
