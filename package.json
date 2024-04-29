@@ -13,7 +13,8 @@
     "build-storybook": "storybook build",
     "test": "jest -u",
     "db:push": "dotenv -c -- prisma db push",
-    "db:studio": "dotenv -c -- prisma studio"
+    "db:studio": "dotenv -c -- prisma studio",
+    "format": "prettier --write --cache \"**/*.{ts,tsx,md,css}\""
   },
   "dependencies": {
     "@lucia-auth/adapter-prisma": "^3.0.2",
@@ -40,6 +41,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.8.1",
     "@commitlint/config-conventional": "^17.8.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@storybook/addon-essentials": "^8.0.6",
     "@storybook/addon-interactions": "^8.0.6",
     "@storybook/addon-links": "^8.0.6",
@@ -50,7 +52,6 @@
     "@tailwindcss/typography": "^0.5.12",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/react": "^18",
