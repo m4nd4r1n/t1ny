@@ -1,7 +1,9 @@
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+import { NextResponse } from 'next/server';
+
 import { ROOT_DOMAIN } from '@/constants/urls';
+import { updateSession } from '@/libs/supabase/middleware';
 
 export const config = {
   matcher: ['/((?!api/|_next/|_static/|_vercel|monitoring|[\\w-]+\\.\\w+).*)'],
@@ -31,7 +33,7 @@ export async function middleware(req: NextRequest) {
     const setPath = rewriteMap[hostname];
     if (typeof setPath === 'function') {
       setPath();
-      return NextResponse.rewrite(rewriteTo);
+      return await updateSession(req, rewriteTo);
     }
   }
 
