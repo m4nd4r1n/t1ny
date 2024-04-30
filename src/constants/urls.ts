@@ -12,12 +12,15 @@ export const ROOT_URL = `${HTTP_SCHEME}://${ROOT_DOMAIN}`;
 
 export const APP_URL = `${HTTP_SCHEME}://app.${ROOT_DOMAIN}`;
 
-export const LOGIN_PATH = '/login';
+export const SIGN_IN_PATH = '/sign-in';
+export const SIGN_IN_URL = `${APP_URL}${SIGN_IN_PATH}`;
 
-export const BLOCKED_PATH = `${LOGIN_PATH}?error=${encodeURIComponent(
-  "You're blocked",
+export const SIGN_UP_PATH = '/sign-up';
+
+export const FORGOT_PASSWORD_PATH = '/forgot-password';
+
+export const BANNED_PATH = `${SIGN_IN_PATH}?error=${encodeURIComponent(
+  "You're banned",
 )}`;
 
 export const HOME_PATH = '/';
-
-export const LOGIN_URL = `${APP_URL}${LOGIN_PATH}`;
