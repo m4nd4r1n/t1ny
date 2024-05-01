@@ -1,22 +1,17 @@
-import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+import type { FC, PropsWithChildren } from 'react';
 
-import { HOME_PATH } from '@/constants/urls';
-import { getPageSession } from '@/libs/lucia';
+import Header from './Header';
 
-export const metadata: Metadata = {
-  title: 't1ny | Login',
-};
+interface AuthLayoutProps extends PropsWithChildren {}
 
-const AuthLayout: React.FC<React.PropsWithChildren> = async ({ children }) => {
-  const session = await getPageSession();
-
-  if (session && session.user.role !== 'BLOCKED') {
-    redirect(HOME_PATH);
-  }
-
+const AuthLayout: FC<AuthLayoutProps> = async ({ children }) => {
   return (
-    <div className='flex h-screen items-center justify-center'>{children}</div>
+    <>
+      <Header />
+      <main className='flex flex-1 items-center justify-center'>
+        <div className='mx-4 w-full max-w-sm space-y-6'>{children}</div>
+      </main>
+    </>
   );
 };
 
