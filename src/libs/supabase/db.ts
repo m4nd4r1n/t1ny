@@ -1,4 +1,4 @@
-import type { Link } from '@/types';
+import type { Database, Link } from '@/types';
 
 import { redirect } from 'next/navigation';
 import * as z from 'zod';
@@ -230,6 +230,63 @@ export const deleteLink = async (id: string) => {
     .delete()
     .eq('user_id', user.id)
     .eq('id', id);
+
+  if (error) throw error;
+};
+
+export const getLinkByIdAdmin = async (urlId: string) => {
+  const supabase = createAdminClient();
+
+  const { data } = await supabase
+    .from('urls')
+    .select('target_url, target_title, target_description, target_og_image')
+    .eq('id', urlId)
+    .limit(1)
+    .single();
+
+  return data;
+};
+
+type AnalyticsColumns = Omit<
+  Database['public']['Tables']['analytics']['Row'],
+  'id' | 'created_at'
+>;
+
+type StringNullToStringUndefined<T> = T extends string
+  ? T
+  : T extends string | null
+    ? string | undefined
+    : T;
+
+type AnalyticsData = {
+  [Key in keyof AnalyticsColumns]: StringNullToStringUndefined<
+    AnalyticsColumns[Key]
+  >;
+};
+
+export const createAnalytics = async (data: AnalyticsData) => {
+  const supabase = createAdminClient();
+  const { error } = await supabase.from('analytics').insert(data);
+
+  if (error) throw error;
+};
+
+export const increaseUrlClick = async (urlId: string) => {
+  const supabase = createAdminClient();
+  const { data, error: getClicksError } = await supabase
+    .from('urls')
+    .select('clicks')
+    .eq('id', urlId)
+    .limit(1)
+    .single();
+  if (getClicksError) throw getClicksError;
+
+  const { error } = await supabase
+    .from('urls')
+    .update({
+      clicks: data.clicks + 1,
+    })
+    .eq('id', urlId);
 
   if (error) throw error;
 };
