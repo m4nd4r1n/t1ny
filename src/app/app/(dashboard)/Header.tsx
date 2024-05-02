@@ -8,7 +8,6 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@/components/Navbar';
-
 import LogoutButton from './LogoutButton';
 import MenuItemLinks from './MenuItemLinks';
 import Profile from './Profile';

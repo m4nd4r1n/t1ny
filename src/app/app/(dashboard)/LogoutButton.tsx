@@ -1,33 +1,33 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-
+import { redirect } from 'next/navigation';
+import { useTransition } from 'react';
 import { FiLogOut } from 'react-icons/fi';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/Button';
-import { API } from '@/libs/api';
+import { SIGN_IN_PATH } from '@/constants/urls';
+import { logout } from './actions';
 
 const LogoutButton = () => {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-  const onButtonClick = async () => {
-    setLoading(true);
-    try {
-      await API.logout();
-      router.refresh();
-    } finally {
-      setLoading(false);
-    }
+  const onLogoutClick = () => {
+    startTransition(async () => {
+      const res = await logout().catch(() => {
+        toast.error('Server error occurred.');
+      });
+      if (!res) return;
+      redirect(SIGN_IN_PATH);
+    });
   };
 
   return (
     <Button
       color='primary'
       fullWidth
-      onClick={onButtonClick}
-      isLoading={loading}
+      onClick={onLogoutClick}
+      isLoading={isPending}
     >
       Logout
       <FiLogOut className='h-4 w-4 text-white' />

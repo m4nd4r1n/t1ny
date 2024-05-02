@@ -26,6 +26,7 @@ const nextConfig = {
         pathname: '/icons/**',
         protocol: 'https',
       },
+      { hostname: 'gravatar.com' },
     ],
   },
   experimental: {
