@@ -290,3 +290,78 @@ export const increaseUrlClick = async (urlId: string) => {
 
   if (error) throw error;
 };
+
+export const getClicksById = async (urlId: string) => {
+  const supabase = createClient();
+  const user = await getUser();
+  const { data, error } = await supabase.rpc(
+    'get_analytics_count_by_month_with_id',
+    {
+      userid: user.id,
+      urlid: urlId,
+    },
+  );
+  if (error) throw error;
+
+  if (data.length <= 1) {
+    const { data, error } = await supabase.rpc(
+      'get_analytics_count_by_day_with_id',
+      {
+        userid: user.id,
+        urlid: urlId,
+      },
+    );
+    if (error) throw error;
+    return data;
+  }
+
+  return data;
+};
+
+export const getCountriesById = async (urlId: string) => {
+  const supabase = createClient();
+  const user = await getUser();
+  const { data, error } = await supabase.rpc('get_countries_by_id', {
+    urlid: urlId,
+    userid: user.id,
+  });
+  if (error) throw error;
+
+  return data;
+};
+
+export const getBrowsersById = async (urlId: string) => {
+  const supabase = createClient();
+  const user = await getUser();
+  const { data, error } = await supabase.rpc('get_browsers_by_id', {
+    urlid: urlId,
+    userid: user.id,
+  });
+  if (error) throw error;
+
+  return data;
+};
+
+export const getOSsById = async (urlId: string) => {
+  const supabase = createClient();
+  const user = await getUser();
+  const { data, error } = await supabase.rpc('get_oss_by_id', {
+    urlid: urlId,
+    userid: user.id,
+  });
+  if (error) throw error;
+
+  return data;
+};
+
+export const getDevicesById = async (urlId: string) => {
+  const supabase = createClient();
+  const user = await getUser();
+  const { data, error } = await supabase.rpc('get_devices_by_id', {
+    urlid: urlId,
+    userid: user.id,
+  });
+  if (error) throw error;
+
+  return data;
+};

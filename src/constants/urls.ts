@@ -24,3 +24,5 @@ export const BANNED_PATH = `${SIGN_IN_PATH}?error=${encodeURIComponent(
 )}`;
 
 export const HOME_PATH = '/';
+
+export const LINKS_PATH = '/links';
