@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation';
+import * as z from 'zod';
 
 import { SIGN_IN_PATH } from '@/constants/urls';
-import { createClient } from './server';
+import { createAdminClient, createClient } from './server';
 
 const getUser = async () => {
   const supabase = createClient();
@@ -82,4 +83,35 @@ export const getProfile = async () => {
   if (error) throw error;
 
   return data;
+};
+
+const nameSchema = z
+  .string()
+  .min(3, 'Name must be at least 3 characters.')
+  .max(32, 'Name can be up to 32 characters long.');
+
+export const updateName = async (name: string) => {
+  const result = nameSchema.safeParse(name);
+  if (!result.success) {
+    throw result.error;
+  }
+
+  const supabase = createClient();
+  const user = await getUser();
+
+  const { error } = await supabase
+    .from('profiles')
+    .update({ name })
+    .eq('user_id', user.id);
+
+  if (error) throw error;
+};
+
+export const deleteUser = async () => {
+  const user = await getUser();
+  const supabaseAdmin = createAdminClient();
+
+  const { error } = await supabaseAdmin.auth.admin.deleteUser(user.id);
+
+  if (error) throw error;
 };

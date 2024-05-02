@@ -1,1 +1,1 @@
-export { default as FormCard } from './FormCard';
+export { default as FormCard, type FormCardProps } from './FormCard';
