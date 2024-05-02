@@ -1,15 +1,24 @@
-import { headers } from 'next/headers';
 import Image from 'next/image';
+import { Suspense } from 'react';
 
-import { API } from '@/libs/api';
-
+import { getLinks } from '@/libs/supabase/db';
 import LinkCard from './LinkCard';
 
-const LinkList = async () => {
-  const links = await API.getLinks(Object.fromEntries(headers()));
-
+const LinkList = () => {
   return (
     <div className='flex h-full flex-col gap-4 overflow-y-scroll'>
+      <Suspense>
+        <LinkListImpl />
+      </Suspense>
+    </div>
+  );
+};
+
+const LinkListImpl = async () => {
+  const links = await getLinks();
+
+  return (
+    <>
       {links.map((link) => (
         <LinkCard key={link.id} link={link} />
       ))}
@@ -32,7 +41,7 @@ const LinkList = async () => {
           </p>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

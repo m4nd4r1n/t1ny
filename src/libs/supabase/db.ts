@@ -1,3 +1,5 @@
+import type { Link } from '@/types';
+
 import { redirect } from 'next/navigation';
 import * as z from 'zod';
 
@@ -112,6 +114,122 @@ export const deleteUser = async () => {
   const supabaseAdmin = createAdminClient();
 
   const { error } = await supabaseAdmin.auth.admin.deleteUser(user.id);
+
+  if (error) throw error;
+};
+
+export const getLinkByUrl = async (url: string) => {
+  const supabase = createClient();
+  const user = await getUser();
+
+  const { data } = await supabase
+    .from('urls')
+    .select('target_url')
+    .eq('user_id', user.id)
+    .eq('target_url', url)
+    .limit(1)
+    .single();
+
+  return data;
+};
+
+export const getLinkById = async (urlId: string) => {
+  const supabase = createClient();
+  const user = await getUser();
+  const { data, error } = await supabase
+    .from('urls')
+    .select('*')
+    .eq('id', urlId)
+    .eq('user_id', user.id)
+    .limit(1)
+    .single();
+  if (error) throw error;
+
+  return data;
+};
+
+interface LinkData extends Omit<Link, 'created_at'> {
+  target_description?: string;
+  target_og_image?: string;
+}
+
+export const createLink = async ({
+  id,
+  target_favicon,
+  target_title,
+  target_url,
+  target_description,
+  target_og_image,
+}: LinkData) => {
+  const supabase = createClient();
+  const user = await getUser();
+
+  const { error: linkCreateError } = await supabase.from('urls').insert({
+    id,
+    target_favicon,
+    target_title,
+    target_url,
+    target_description,
+    target_og_image,
+    user_id: user.id,
+  });
+  if (linkCreateError) throw linkCreateError;
+};
+
+export const decreaseUrlLimit = async () => {
+  const supabase = createAdminClient();
+  const [user, { day_limit, total_limit }] = await Promise.all([
+    getUser(),
+    getUrlLimits(),
+  ]);
+  const decreasedDayLimit = day_limit > 0 ? day_limit - 1 : day_limit;
+  const decreasedTotalLimit = total_limit > 0 ? total_limit - 1 : total_limit;
+  const { error } = await supabase
+    .from('url_limit')
+    .update({ day_limit: decreasedDayLimit, total_limit: decreasedTotalLimit })
+    .eq('user_id', user.id);
+
+  if (error) throw error;
+};
+
+export const increaseUrlTotalLimit = async () => {
+  const supabase = createAdminClient();
+  const [user, { total_limit }] = await Promise.all([
+    getUser(),
+    getUrlLimits(),
+  ]);
+  const increasedTotalLimit = total_limit < 500 ? total_limit + 1 : total_limit;
+  const { error } = await supabase
+    .from('url_limit')
+    .update({ total_limit: increasedTotalLimit })
+    .eq('user_id', user.id);
+
+  if (error) throw error;
+};
+
+export const getLinks = async () => {
+  const supabase = createClient();
+  const user = await getUser();
+
+  const { data, error } = await supabase
+    .from('urls')
+    .select('id, target_url, created_at, target_favicon, target_title')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+
+  return data;
+};
+
+export const deleteLink = async (id: string) => {
+  const supabase = createClient();
+  const user = await getUser();
+  const { error } = await supabase
+    .from('urls')
+    .delete()
+    .eq('user_id', user.id)
+    .eq('id', id);
 
   if (error) throw error;
 };
