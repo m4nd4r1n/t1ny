@@ -5,12 +5,15 @@ import {
   NavbarItem,
   NavbarLogo,
 } from '@/components/Navbar';
-import { APP_URL, LOGIN_URL } from '@/constants/urls';
-import { getPageSession } from '@/libs/lucia';
+import { APP_URL, SIGN_IN_URL } from '@/constants/urls';
+import { createClient } from '@/libs/supabase/server';
 
 const Header = async () => {
-  const session = await getPageSession();
-  const isLoggedIn = !!session;
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const isLoggedIn = !!user;
 
   return (
     <Navbar>
@@ -25,13 +28,16 @@ const Header = async () => {
       <NavbarContent justify='end'>
         {!isLoggedIn && (
           <NavbarItem>
-            <Link href={LOGIN_URL} color='default'>
+            <Link href={SIGN_IN_URL} color='default'>
               Sign in
             </Link>
           </NavbarItem>
         )}
         <NavbarItem>
-          <Link className='font-medium' href={isLoggedIn ? APP_URL : LOGIN_URL}>
+          <Link
+            className='font-medium'
+            href={isLoggedIn ? APP_URL : SIGN_IN_URL}
+          >
             {isLoggedIn ? 'Go to dashboard' : 'Get started'}
           </Link>
         </NavbarItem>
