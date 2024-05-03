@@ -365,3 +365,17 @@ export const getDevicesById = async (urlId: string) => {
 
   return data;
 };
+
+export const getRole = async (userId: string) => {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from('user_role')
+    .select('role')
+    .eq('user_id', userId)
+    .limit(1)
+    .single();
+
+  if (error) throw error;
+
+  return data.role;
+};
