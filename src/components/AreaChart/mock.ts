@@ -1,4 +1,4 @@
-import { random } from '@/libs/utils';
+import { generateRandomNumberBetween } from '@/utils/random';
 
 const months = [
   'Jan',
@@ -17,8 +17,8 @@ const months = [
 
 export const mockData = months.map((month) => ({
   date: `${month} 23`,
-  'Mock A': random(1000, 4000),
-  'Mock B': random(1000, 4000),
-  'Mock C': random(1000, 4000),
-  'Mock D': random(1000, 4000),
+  'Mock A': generateRandomNumberBetween(1000, 4000),
+  'Mock B': generateRandomNumberBetween(1000, 4000),
+  'Mock C': generateRandomNumberBetween(1000, 4000),
+  'Mock D': generateRandomNumberBetween(1000, 4000),
 }));

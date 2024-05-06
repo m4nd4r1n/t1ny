@@ -1,14 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-
+import { useState, useTransition } from 'react';
 import { FaTrashCan } from 'react-icons/fa6';
 import { toast } from 'sonner';
 
+import { deleteLinkAction } from '@/app/app/(dashboard)/links/actions';
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
-import { API } from '@/libs/api';
 
 interface LinkDeleteButtonProps {
   urlId: string;
@@ -17,6 +16,7 @@ interface LinkDeleteButtonProps {
 const LinkDeleteButton: React.FC<LinkDeleteButtonProps> = ({ urlId }) => {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const open = () => {
     setOpen(true);
@@ -24,16 +24,19 @@ const LinkDeleteButton: React.FC<LinkDeleteButtonProps> = ({ urlId }) => {
   const close = () => {
     setOpen(false);
   };
-  const onDeleteClick = async () => {
-    try {
-      await API.deleteLink(urlId);
-      toast.success('Link deleted');
-      close();
-      router.replace('/links');
-      router.refresh();
-    } catch (e) {
-      if (e instanceof Error) toast.error(e.message);
-    }
+  const onDeleteClick = () => {
+    startTransition(async () => {
+      const res = await deleteLinkAction(urlId).catch(() => {
+        toast.error('Server error occurred.');
+      });
+      if (!res) return;
+      if (res.ok) {
+        toast.success(res.message);
+        close();
+        router.replace('/links');
+        router.refresh();
+      }
+    });
   };
 
   return (
@@ -55,7 +58,7 @@ const LinkDeleteButton: React.FC<LinkDeleteButtonProps> = ({ urlId }) => {
           >
             Cancel
           </Button>
-          <Button onClick={onDeleteClick} color='danger'>
+          <Button onClick={onDeleteClick} color='danger' isLoading={isPending}>
             Delete link
           </Button>
         </div>

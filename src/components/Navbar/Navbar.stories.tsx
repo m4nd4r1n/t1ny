@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { Avatar, LoremIpsum, username } from 'react-lorem-ipsum';
 
 import {
@@ -40,7 +41,7 @@ const App: React.FC<AppProps> = ({ children, isMenu }) => (
   <div className='max-h-screen w-full overflow-y-scroll border border-default'>
     {children}
     <div className='flex'>
-      {isMenu && <div className='ml-60 hidden h-full w-0 sm:block'></div>}
+      {isMenu && <div className='ml-60 hidden h-full w-0 md:block'></div>}
       <div className={`prose mx-auto min-h-screen-header max-w-screen-lg p-4`}>
         <h1>Lorem ipsum dolor sit ame</h1>
         <div className='text-lg'>

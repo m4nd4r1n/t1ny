@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
 
-import { BLOCKED_PATH, LOGIN_PATH } from '@/libs/constants';
-import { getPageSession } from '@/libs/lucia';
-
+import { checkUserSignedIn } from '@/utils/check-user';
 import Header from './Header';
 
 export const metadata: Metadata = {
@@ -13,18 +10,13 @@ export const metadata: Metadata = {
 const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
   children,
 }) => {
-  const session = await getPageSession();
-
-  if (!session) {
-    redirect(LOGIN_PATH);
-  }
-  if (session.user.role === 'BLOCKED') redirect(BLOCKED_PATH);
+  await checkUserSignedIn();
 
   return (
     <>
       <Header />
       <main className='mx-auto flex w-full min-w-0 max-w-screen-lg-menu'>
-        <div className='ml-60 hidden sm:block'></div>
+        <div className='ml-60 hidden md:block'></div>
         <div className='flex max-h-screen-header w-full min-w-0 flex-col gap-8 p-8'>
           {children}
         </div>

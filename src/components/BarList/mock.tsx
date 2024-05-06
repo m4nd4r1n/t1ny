@@ -1,7 +1,7 @@
 import { FaGithub, FaReddit, FaXTwitter, FaYoutube } from 'react-icons/fa6';
 import { FcGoogle } from 'react-icons/fc';
 
-import { random } from '@/libs/utils';
+import { generateRandomNumberBetween } from '@/utils/random';
 
 const names = ['X', 'Google', 'GitHub', 'Reddit', 'Youtube'];
 const icons = [
@@ -14,7 +14,7 @@ const icons = [
 
 const base = names.map((name) => ({
   name,
-  value: random(1000, 4000),
+  value: generateRandomNumberBetween(1000, 4000),
 }));
 
 export const mockData = base.sort((a, b) => b.value - a.value);

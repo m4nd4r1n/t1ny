@@ -1,5 +1,8 @@
 'use client';
 
+import type { ValueFormatter } from '@/types';
+import type { AxisDomain } from 'recharts/types/util/types';
+
 import {
   Area,
   CartesianGrid,
@@ -11,12 +14,9 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import type { AxisDomain } from 'recharts/types/util/types';
 
 import { NoData } from '@/components/NoData';
-import { colors } from '@/libs/colors';
-import type { ValueFormatter } from '@/libs/types';
-
+import { colors } from '@/constants/colors';
 import { ChartLegend } from '../ChartLegend';
 import { ChartTooltip } from '../ChartTooltip';
 import { areaChart } from './AreaChart.styles';

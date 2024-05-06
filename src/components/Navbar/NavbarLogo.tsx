@@ -1,4 +1,4 @@
-import type { Props } from '@/libs/types';
+import type { Props } from '@/types';
 
 import { useNavBarContext } from './context';
 
