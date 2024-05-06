@@ -16,7 +16,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
     <>
       <Header />
       <main className='mx-auto flex w-full min-w-0 max-w-screen-lg-menu'>
-        <div className='ml-60 hidden sm:block'></div>
+        <div className='ml-60 hidden md:block'></div>
         <div className='flex max-h-screen-header w-full min-w-0 flex-col gap-8 p-8'>
           {children}
         </div>

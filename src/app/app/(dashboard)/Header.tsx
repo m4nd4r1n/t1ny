@@ -15,7 +15,7 @@ import Profile from './Profile';
 const Header = () => {
   const menu = (
     <NavbarMenu>
-      <LogoLink className='hidden w-fit sm:inline-flex' />
+      <LogoLink className='hidden w-fit md:inline-flex' />
       <MenuItemLinks />
       <NavbarMenuItem justify='end'>
         <LogoutButton />
@@ -26,7 +26,7 @@ const Header = () => {
     <Navbar menu={menu}>
       <NavbarMenuToggle />
       <NavbarLogo>
-        <LogoLink className='sm:hidden' />
+        <LogoLink className='md:hidden' />
       </NavbarLogo>
       <NavbarContent justify='end'>
         <NavbarItem>
