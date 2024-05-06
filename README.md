@@ -40,35 +40,26 @@ Free URL shortener built with [Next.js](https://github.com/vercel/next.js) and [
 
 ## Architecture
 
-<img width="896" alt="architecture" src="https://github.com/m4nd4r1n/t1ny/assets/96206089/665a41a8-7a4d-4aac-a3ec-7ae4b13c537f">
+<img width="804" alt="architecture" src="https://github.com/m4nd4r1n/t1ny/assets/96206089/8c536bbc-53ab-4383-948f-1ff6ca080918">
 
 ## How to run
 
-### Prerequisites
-
-- [Node.js](https://nodejs.org/en/) (>= 18)
-- [pnpm](https://pnpm.io/) (>= 8)
-
 #### 1. Setup environment variables
 
-```
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
-GOOGLE_REDIRECT_URI=
-DATABASE_URL=
-BROWSER_WS_ENDPOINT= # For puppeteer
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
+```bash
+cp .env.example .env.local
 ```
 
-#### 2. Install dependencies
+Then fill the variables in `.env.local`.
+
+#### 2. Build
 
 ```bash
-pnpm install
+docker build -t t1ny:latest .
 ```
 
-#### 3. Run development server
+#### 3. Run
 
 ```bash
-pnpm dev
+docker run -d --name t1ny -p 3000:3000 --env-file .env.local t1ny:latest
 ```
