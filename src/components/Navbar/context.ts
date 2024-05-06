@@ -1,6 +1,6 @@
-import { createContext, useContext } from 'react';
-
 import type { navbar } from './Navbar.styles';
+
+import { createContext, useContext } from 'react';
 
 interface NavbarContext {
   isMenuOpen?: boolean;

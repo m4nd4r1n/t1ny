@@ -1,9 +1,9 @@
-import { useState } from 'react';
-
 import type { Props } from '@/types';
 
-import { navbar } from './Navbar.styles';
+import { useState } from 'react';
+
 import { NavbarContext } from './context';
+import { navbar } from './Navbar.styles';
 
 interface NavbarProps extends Props {
   menu?: React.ReactNode;

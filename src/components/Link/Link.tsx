@@ -1,8 +1,7 @@
-import NextLink from 'next/link';
-
+import type { Props } from '@/types';
 import type { VariantProps } from 'tailwind-variants';
 
-import type { Props } from '@/types';
+import NextLink from 'next/link';
 
 import { link } from './Link.styles';
 

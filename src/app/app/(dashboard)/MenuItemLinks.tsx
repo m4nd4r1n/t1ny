@@ -1,12 +1,10 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-
 import { LuLayoutDashboard, LuLink, LuSettings } from 'react-icons/lu';
 
 import { Link } from '@/components/Link';
-import { NavbarMenuItem } from '@/components/Navbar';
-import { useNavBarContext } from '@/components/Navbar';
+import { NavbarMenuItem, useNavBarContext } from '@/components/Navbar';
 
 const menuItems = [
   {
