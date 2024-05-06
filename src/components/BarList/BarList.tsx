@@ -1,7 +1,7 @@
-import { Link } from '@/components/Link';
-import { colors } from '@/libs/colors';
-import type { ValueFormatter } from '@/libs/types';
+import type { ValueFormatter } from '@/types';
 
+import { Link } from '@/components/Link';
+import { colors } from '@/constants/colors';
 import { barList } from './BarList.styles';
 
 type Bar = {

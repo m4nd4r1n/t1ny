@@ -1,67 +1,60 @@
 import type { Metadata } from 'next';
+
 import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
-
 import UAParser from 'ua-parser-js';
 
-import prisma from '@/libs/prisma';
+import {
+  createAnalytics,
+  getLinkByIdAdmin,
+  increaseUrlClick,
+} from '@/libs/supabase/db';
 
 interface RedirectProps {
   params: { id: string };
 }
 
 const Redirect = async ({ params: { id } }: RedirectProps) => {
-  const link = await getLink(id);
+  const link = await getLinkByIdAdmin(id);
 
   if (!link) {
     notFound();
   } else {
-    await createAnalytics(id);
+    await createAnalytic(id);
     redirect(link.target_url);
   }
 };
 
-const getLink = (id: string) => {
-  return prisma.url.findUnique({
-    where: { id },
-  });
-};
-
-const createAnalytics = async (id: string) => {
+const createAnalytic = async (id: string) => {
   const header = headers();
-  const userAgent = header.get('user-agent');
-  const ip = header.get('x-real-ip');
-  const country = header.get('x-geoip-country');
+  const userAgent = header.get('user-agent') ?? undefined;
+  const ip = header.get('x-real-ip') ?? undefined;
+  const country = header.get('x-geoip-country') ?? undefined;
   const parser = new UAParser(userAgent ?? '');
   const { name: browser } = parser.getBrowser();
   const { name: os } = parser.getOS();
   const { model: device } = parser.getDevice();
 
   await Promise.all([
-    prisma.url.update({
-      where: { id },
-      data: { clicks: { increment: 1 } },
-    }),
-    prisma.analytics.create({
-      data: {
-        ip_address: ip,
-        user_agent: userAgent,
-        country,
-        url: { connect: { id } },
-        browser,
-        os,
-        device,
-      },
+    increaseUrlClick(id),
+    createAnalytics({
+      browser,
+      url_id: id,
+      device,
+      ip_address: ip,
+      country,
+      os,
+      user_agent: userAgent,
     }),
   ]);
 };
 
 export const generateMetadata = async ({
-  params,
+  params: { id },
 }: RedirectProps): Promise<Metadata> => {
-  const { id } = params;
-  const link = await getLink(id);
+  const link = await getLinkByIdAdmin(id);
   if (!link) return {};
+
   const {
     target_title: title,
     target_description: description,
@@ -78,4 +71,5 @@ export const generateMetadata = async ({
     },
   };
 };
+
 export default Redirect;

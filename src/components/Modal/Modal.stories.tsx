@@ -1,8 +1,9 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import type { ModalProps } from '.';
+
 import { useState } from 'react';
 
-import type { Meta, StoryObj } from '@storybook/react';
-
-import { Modal, type ModalProps } from '.';
+import { Modal } from '.';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { modal } from './Modal.styles';

@@ -1,5 +1,7 @@
 'use client';
 
+import type { ValueFormatter } from '@/types';
+
 import {
   Pie,
   PieChart as ReChartsDonutChart,
@@ -8,9 +10,7 @@ import {
 } from 'recharts';
 
 import { NoData } from '@/components/NoData';
-import { colors } from '@/libs/colors';
-import type { ValueFormatter } from '@/libs/types';
-
+import { colors } from '@/constants/colors';
 import { donutChart } from './DonutChart.styles';
 import DonutChartTooltip from './DonutChartTooltip';
 

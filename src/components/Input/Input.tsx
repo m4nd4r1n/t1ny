@@ -1,3 +1,6 @@
+import type { PropsWithoutChildren } from '@/types';
+import type { VariantProps } from 'tailwind-variants';
+
 import {
   forwardRef,
   useId,
@@ -5,10 +8,6 @@ import {
   useRef,
   useState,
 } from 'react';
-
-import type { VariantProps } from 'tailwind-variants';
-
-import type { PropsWithoutChildren } from '@/libs/types';
 
 import { input } from './Input.styles';
 

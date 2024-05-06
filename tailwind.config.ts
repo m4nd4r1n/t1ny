@@ -1,5 +1,6 @@
-import { withTV } from 'tailwind-variants/transformer';
 import type { Config } from 'tailwindcss';
+
+import { withTV } from 'tailwind-variants/transformer';
 import colors from 'tailwindcss/colors';
 import defaultTheme from 'tailwindcss/defaultTheme';
 

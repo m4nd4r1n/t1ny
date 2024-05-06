@@ -1,3 +1,4 @@
+import type { ValueFormatter } from '@/types';
 import type {
   NameType,
   Payload,
@@ -8,7 +9,6 @@ import {
   ChartTooltipRow,
   ChartTooltipWrapper,
 } from '@/components/ChartTooltip';
-import type { ValueFormatter } from '@/libs/types';
 
 interface DonutChartTooltipProps {
   active?: boolean;

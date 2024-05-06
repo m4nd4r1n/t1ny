@@ -1,85 +1,85 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import type { FC } from 'react';
+import type { NewLinkForm } from './schema';
 
-import { experimental_useFormStatus as useFormStatus } from 'react-dom';
+import { useRouter } from 'next/navigation';
+import { ReactElement, useState, useTransition } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
+import { createLinkAction } from '@/app/app/(dashboard)/links/actions';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { Modal } from '@/components/Modal';
-import { createLink } from '@/libs/actions';
-import type { LinkLimits } from '@/libs/types';
+import { newLinkFormSchema } from './schema';
 
-const CreateNewLink: React.FC<LinkLimits> = ({ day_limit, total_limit }) => {
+interface CreateNewLinkProps {
+  limitsElement: ReactElement;
+}
+
+const CreateNewLink: FC<CreateNewLinkProps> = ({ limitsElement }) => {
+  const [isPending, startTransition] = useTransition();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<NewLinkForm>({
+    resolver: zodResolver(newLinkFormSchema),
+    mode: 'all',
+  });
   const [isOpen, setOpen] = useState(false);
-  const [error, setError] = useState('');
   const router = useRouter();
 
   const open = () => {
     setOpen(true);
-    setError('');
   };
   const close = () => {
     setOpen(false);
+  };
+
+  const handleFormSubmit = (values: NewLinkForm) => {
+    startTransition(async () => {
+      const res = await createLinkAction(values).catch(() => {
+        toast.error('Server error occurred.');
+      });
+      if (!res) return;
+      if (res.ok) {
+        close();
+        router.refresh();
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
+    });
   };
 
   return (
     <>
       <Button onClick={open}>Create new link</Button>
       <Modal isOpen={isOpen} onClose={close}>
-        <form
-          className='space-y-8'
-          action={async (data) => {
-            try {
-              await createLink(data);
-              close();
-              router.refresh();
-              toast.success('Link created successfully!');
-            } catch (e) {
-              if (e instanceof Error) setError(e.message);
-            }
-          }}
-        >
+        <form className='space-y-8' onSubmit={handleSubmit(handleFormSubmit)}>
           <h2 className='text-2xl'>Create a new link</h2>
           <div>
             <Input
               type='url'
-              name='destination'
               id='destination'
               label='Destination'
               placeholder='https://example.com/long-url'
               isRequired
-              isInvalid={!!error}
-              errorMessage={error}
+              errorMessage={errors.destination?.message}
+              isInvalid={!!errors.destination}
+              {...register('destination')}
             />
-            <div className='mt-1.5 text-sm text-default-500'>
-              <div>
-                You can create{' '}
-                <span className='font-bold text-default'>{day_limit}</span> more
-                links today.
-              </div>
-              <div>
-                You can create{' '}
-                <span className='font-bold text-default'>{total_limit}</span>{' '}
-                more links in total.
-              </div>
-            </div>
+            {limitsElement}
           </div>
-          <CreateButton />
+          <Button type='submit' fullWidth isLoading={isPending}>
+            Create
+          </Button>
         </form>
       </Modal>
     </>
-  );
-};
-
-const CreateButton = () => {
-  const { pending } = useFormStatus();
-  return (
-    <Button type='submit' fullWidth isLoading={pending}>
-      Create
-    </Button>
   );
 };
 
