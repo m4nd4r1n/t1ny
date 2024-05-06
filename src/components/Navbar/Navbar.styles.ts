@@ -18,7 +18,7 @@ export const navbar = tv({
     ],
     nav: 'relative z-40 mx-auto flex h-16 w-full max-w-screen-lg flex-nowrap items-center justify-between gap-4 px-6',
     toggle:
-      'group flex h-full w-6 items-center justify-center rounded-md outline-none sm:hidden',
+      'group flex h-full w-6 items-center justify-center rounded-md outline-none md:hidden',
     srOnly: 'sr-only',
     toggleIcon: [
       'w-full',
@@ -89,8 +89,8 @@ export const navbar = tv({
       'overflow-y-auto',
       'bg-gray-light',
       'transform',
-      'sm:translate-x-0',
-      'sm:w-60',
+      'md:translate-x-0',
+      'md:w-60',
       'transition-all',
       'p-4',
       'border-r',
@@ -112,8 +112,8 @@ export const navbar = tv({
   variants: {
     hasMenu: {
       true: {
-        header: 'sm:ml-60 sm:w-[calc(100%-15rem)]',
-        menu: 'sm:top-0',
+        header: 'md:ml-60 md:w-[calc(100%-15rem)]',
+        menu: 'md:top-0',
       },
     },
   },
