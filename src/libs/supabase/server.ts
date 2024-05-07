@@ -9,7 +9,6 @@ const serverClientFactory =
   (
     key: string,
     auth: SupabaseClientOptions<Database>['auth'] = {
-      autoRefreshToken: true,
       detectSessionInUrl: true,
       persistSession: true,
     },
@@ -30,7 +29,6 @@ const serverClientFactory =
               cookieStore.set({
                 name,
                 value,
-                domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
                 ...options,
               });
             } catch (e) {
@@ -44,7 +42,6 @@ const serverClientFactory =
               cookieStore.set({
                 name,
                 value: '',
-                domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
                 ...options,
               });
             } catch (e) {
@@ -54,7 +51,13 @@ const serverClientFactory =
             }
           },
         },
-        auth,
+        auth: {
+          autoRefreshToken: false,
+          ...auth,
+        },
+        cookieOptions: {
+          domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
+        },
       },
     );
   };
@@ -62,7 +65,6 @@ const serverClientFactory =
 export const createAdminClient = serverClientFactory(
   process.env.SERVICE_ROLE_KEY!,
   {
-    autoRefreshToken: false,
     detectSessionInUrl: false,
     persistSession: false,
   },
