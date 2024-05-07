@@ -30,7 +30,6 @@ const serverClientFactory =
               cookieStore.set({
                 name,
                 value,
-                domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
                 ...options,
               });
             } catch (e) {
@@ -44,7 +43,6 @@ const serverClientFactory =
               cookieStore.set({
                 name,
                 value: '',
-                domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
                 ...options,
               });
             } catch (e) {
@@ -55,6 +53,9 @@ const serverClientFactory =
           },
         },
         auth,
+        cookieOptions: {
+          domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
+        },
       },
     );
   };

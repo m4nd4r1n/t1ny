@@ -34,7 +34,6 @@ export const updateSession = async (request: NextRequest, rewriteTo: URL) => {
           response.cookies.set({
             name,
             value,
-            domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
             ...options,
           });
         },
@@ -42,7 +41,6 @@ export const updateSession = async (request: NextRequest, rewriteTo: URL) => {
           request.cookies.set({
             name,
             value: '',
-            domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
             ...options,
           });
           response = NextResponse.rewrite(rewriteTo, {
@@ -53,10 +51,12 @@ export const updateSession = async (request: NextRequest, rewriteTo: URL) => {
           response.cookies.set({
             name,
             value: '',
-            domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
             ...options,
           });
         },
+      },
+      cookieOptions: {
+        domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
       },
     },
   );
