@@ -5,11 +5,7 @@ import { NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
 export const updateSession = async (request: NextRequest, rewriteTo: URL) => {
-  let response = NextResponse.rewrite(rewriteTo, {
-    request: {
-      headers: request.headers,
-    },
-  });
+  const response = NextResponse.rewrite(rewriteTo);
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -23,13 +19,7 @@ export const updateSession = async (request: NextRequest, rewriteTo: URL) => {
           request.cookies.set({
             name,
             value,
-            domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
             ...options,
-          });
-          response = NextResponse.rewrite(rewriteTo, {
-            request: {
-              headers: request.headers,
-            },
           });
           response.cookies.set({
             name,
@@ -42,11 +32,6 @@ export const updateSession = async (request: NextRequest, rewriteTo: URL) => {
             name,
             value: '',
             ...options,
-          });
-          response = NextResponse.rewrite(rewriteTo, {
-            request: {
-              headers: request.headers,
-            },
           });
           response.cookies.set({
             name,
