@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 
 import { Button } from '@/components/Button';
 import { SIGN_IN_PATH } from '@/constants/urls';
-import { logout } from './actions';
+import { logout } from '../actions';
 
 const LogoutButton = () => {
   const [isPending, startTransition] = useTransition();

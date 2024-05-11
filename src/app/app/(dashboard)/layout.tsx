@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 
 import { cookies } from 'next/headers';
 
+import { ReactQueryClientProvider } from '@/app/ReactQueryClientProvider';
 import { useSupabaseServer } from '@/libs/supabase/server';
 import { checkUserSignedIn } from '@/utils/check-user';
-import Header from './Header';
+import Header from './_components/Header';
 
 export const metadata: Metadata = {
   title: 't1ny | Dashboard',
@@ -19,7 +20,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
   await checkUserSignedIn(supabase);
 
   return (
-    <>
+    <ReactQueryClientProvider>
       <Header />
       <main className='mx-auto flex w-full min-w-0 max-w-screen-lg-menu'>
         <div className='ml-60 hidden md:block'></div>
@@ -27,7 +28,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
           {children}
         </div>
       </main>
-    </>
+    </ReactQueryClientProvider>
   );
 };
 

@@ -1,6 +1,6 @@
-import LinkUsage from './LinkUsage';
-import TotalLinkClicks from './TotalLinkClicks';
-import TrendingLinks from './TrendingLinks';
+import LinkUsage from './_components/LinkUsage';
+import TotalLinkClicks from './_components/TotalLinkClicks';
+import TrendingLinks from './_components/TrendingLinks';
 
 const AppPage = () => {
   return (
