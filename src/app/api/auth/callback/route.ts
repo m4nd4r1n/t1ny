@@ -1,9 +1,10 @@
 import type { NextRequest } from 'next/server';
 
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 import { APP_URL, HOME_PATH, SIGN_IN_PATH } from '@/constants/urls';
-import { createClient } from '@/libs/supabase/server';
+import { createServerActionClient } from '@/libs/supabase/server';
 
 export const GET = async (request: NextRequest) => {
   const { searchParams } = new URL(request.url);
@@ -11,7 +12,8 @@ export const GET = async (request: NextRequest) => {
   const next = searchParams.get('next') ?? HOME_PATH;
 
   if (code) {
-    const supabase = createClient();
+    const cookieStore = cookies();
+    const supabase = createServerActionClient(cookieStore);
 
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     console.error(error);

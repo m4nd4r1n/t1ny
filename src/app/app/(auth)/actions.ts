@@ -9,10 +9,10 @@ import type {
 } from './schema';
 import type { OAuthProvider } from './types';
 
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import { createClient } from '@/libs/supabase/server';
+import { createServerActionClient } from '@/libs/supabase/server';
 import {
   failureResponse,
   successResponse,
@@ -30,7 +30,9 @@ const auth =
       return failureResponse(result.error.message);
     }
 
-    const supabase = createClient();
+    const cookieStore = cookies();
+    const supabase = createServerActionClient(cookieStore);
+
     const { signUp, signInWithPassword } = supabase.auth;
     const { email, password } = values;
 
@@ -73,7 +75,9 @@ export const forgotPassword = async (values: ForgotPasswordForm) => {
     return failureResponse(result.error.message);
   }
 
-  const supabase = createClient();
+  const cookieStore = cookies();
+  const supabase = createServerActionClient(cookieStore);
+
   const { email } = values;
 
   const { error } = await supabase.auth.resetPasswordForEmail(email);
@@ -88,7 +92,8 @@ export const forgotPassword = async (values: ForgotPasswordForm) => {
 
 export const oauthLogin = async (provider: OAuthProvider) => {
   const origin = headers().get('origin');
-  const supabase = createClient();
+  const cookieStore = cookies();
+  const supabase = createServerActionClient(cookieStore);
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
@@ -111,7 +116,8 @@ export const changePassword = async (values: ChangePasswordForm) => {
     return failureResponse(result.error.message);
   }
   const { password } = values;
-  const supabase = createClient();
+  const cookieStore = cookies();
+  const supabase = createServerActionClient(cookieStore);
 
   const { error } = await supabase.auth.updateUser({
     password,

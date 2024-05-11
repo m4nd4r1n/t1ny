@@ -1,7 +1,7 @@
 'use client';
 
 import type { FC } from 'react';
-import type { NewLinkForm } from './schema';
+import type { NewLinkForm } from '../schema';
 
 import { useRouter } from 'next/navigation';
 import { ReactElement, useState, useTransition } from 'react';
@@ -9,11 +9,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { createLinkAction } from '@/app/app/(dashboard)/links/actions';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { Modal } from '@/components/Modal';
-import { newLinkFormSchema } from './schema';
+import { createLinkAction } from '../actions';
+import { newLinkFormSchema } from '../schema';
 
 interface CreateNewLinkProps {
   limitsElement: ReactElement;
@@ -25,6 +25,7 @@ const CreateNewLink: FC<CreateNewLinkProps> = ({ limitsElement }) => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<NewLinkForm>({
     resolver: zodResolver(newLinkFormSchema),
     mode: 'all',
@@ -47,6 +48,7 @@ const CreateNewLink: FC<CreateNewLinkProps> = ({ limitsElement }) => {
       if (!res) return;
       if (res.ok) {
         close();
+        setValue('destination', '');
         router.refresh();
         toast.success(res.message);
       } else {

@@ -1,31 +1,35 @@
 import type { Metadata } from 'next';
 
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import UAParser from 'ua-parser-js';
 
 import {
   createAnalytics,
-  getLinkByIdAdmin,
-  increaseUrlClick,
-} from '@/libs/supabase/db';
+  getLinkById,
+  updateUrlClick,
+} from '@/libs/supabase/queries';
+import { createSupabaseAdmin, useSupabaseAdmin } from '@/libs/supabase/server';
+import { TypedSupabaseClient } from '@/types/supabase';
 
 interface RedirectProps {
   params: { id: string };
 }
 
 const Redirect = async ({ params: { id } }: RedirectProps) => {
-  const link = await getLinkByIdAdmin(id);
+  const cookieStore = cookies();
+  const supabase = useSupabaseAdmin(cookieStore);
+  const { data: link } = await getLinkById(supabase, id);
 
   if (!link) {
     notFound();
   } else {
-    await createAnalytic(id);
+    await createAnalytic(supabase, id);
     redirect(link.target_url);
   }
 };
 
-const createAnalytic = async (id: string) => {
+const createAnalytic = async (client: TypedSupabaseClient, id: string) => {
   const header = headers();
   const userAgent = header.get('user-agent') ?? undefined;
   const ip = header.get('x-real-ip') ?? undefined;
@@ -35,9 +39,13 @@ const createAnalytic = async (id: string) => {
   const { name: os } = parser.getOS();
   const { model: device } = parser.getDevice();
 
+  const { data } = await getLinkById(client, id);
+
+  if (!data) return;
+
   await Promise.all([
-    increaseUrlClick(id),
-    createAnalytics({
+    updateUrlClick(client, id, data.clicks + 1),
+    createAnalytics(client, {
       browser,
       url_id: id,
       device,
@@ -52,7 +60,9 @@ const createAnalytic = async (id: string) => {
 export const generateMetadata = async ({
   params: { id },
 }: RedirectProps): Promise<Metadata> => {
-  const link = await getLinkByIdAdmin(id);
+  const cookieStore = cookies();
+  const supabase = createSupabaseAdmin(cookieStore);
+  const { data: link } = await getLinkById(supabase, id);
   if (!link) return {};
 
   const {
