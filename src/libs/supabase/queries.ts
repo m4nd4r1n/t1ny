@@ -1,4 +1,4 @@
-import type { Link } from '@/types';
+import type { Database, Link } from '@/types';
 import type { TypedSupabaseClient } from '@/types/supabase';
 
 export const getUrlLimits = (client: TypedSupabaseClient) =>
@@ -94,3 +94,31 @@ export const getLinks = (client: TypedSupabaseClient) =>
 
 export const deleteLink = (client: TypedSupabaseClient, id: string) =>
   client.from('urls').delete().eq('id', id).throwOnError();
+
+type AnalyticsColumns = Omit<
+  Database['public']['Tables']['analytics']['Row'],
+  'id' | 'created_at'
+>;
+
+type StringNullToStringUndefined<T> = T extends string
+  ? T
+  : T extends string | null
+    ? string | undefined
+    : T;
+
+type AnalyticsData = {
+  [Key in keyof AnalyticsColumns]: StringNullToStringUndefined<
+    AnalyticsColumns[Key]
+  >;
+};
+
+export const createAnalytics = (
+  client: TypedSupabaseClient,
+  data: AnalyticsData,
+) => client.from('analytics').insert(data).throwOnError();
+
+export const updateUrlClick = (
+  client: TypedSupabaseClient,
+  urlId: string,
+  clicks: number,
+) => client.from('urls').update({ clicks }).eq('id', urlId).throwOnError();
