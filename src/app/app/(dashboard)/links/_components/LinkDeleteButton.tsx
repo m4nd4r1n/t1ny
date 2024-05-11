@@ -5,9 +5,9 @@ import { useState, useTransition } from 'react';
 import { FaTrashCan } from 'react-icons/fa6';
 import { toast } from 'sonner';
 
-import { deleteLinkAction } from '@/app/app/(dashboard)/links/actions';
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
+import { deleteLinkAction } from '../actions';
 
 interface LinkDeleteButtonProps {
   urlId: string;

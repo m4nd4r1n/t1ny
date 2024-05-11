@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
-import CreateNewLink from './CreateNewLink';
-import LimitsText from './LimitsText';
-import LinkList from './LinkList';
+import CreateNewLink from './_components/CreateNewLink';
+import LimitsText from './_components/LimitsText';
+import LinkList from './_components/LinkList';
 
 const LinksPage = () => {
   return (

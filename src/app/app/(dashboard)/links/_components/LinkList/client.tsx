@@ -1,21 +1,17 @@
+'use client';
+
 import Image from 'next/image';
-import { Suspense } from 'react';
+import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
 
-import { getLinks } from '@/libs/supabase/db';
-import LinkCard from './LinkCard';
+import { useSupabaseBrowser } from '@/libs/supabase/client';
+import { getLinks } from '@/libs/supabase/queries';
+import LinkCard from '../LinkCard';
 
-const LinkList = () => {
-  return (
-    <div className='flex h-full flex-col gap-4 overflow-y-scroll'>
-      <Suspense>
-        <LinkListImpl />
-      </Suspense>
-    </div>
-  );
-};
+const LinkListClient = () => {
+  const supabase = useSupabaseBrowser();
+  const { data: links } = useQuery(getLinks(supabase));
 
-const LinkListImpl = async () => {
-  const links = await getLinks();
+  if (!links) return null;
 
   return (
     <>
@@ -45,4 +41,4 @@ const LinkListImpl = async () => {
   );
 };
 
-export default LinkList;
+export default LinkListClient;

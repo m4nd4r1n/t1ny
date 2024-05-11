@@ -1,25 +1,7 @@
 import type { Response } from '@/utils/server-action-response';
 import type { FC } from 'react';
 
-import { Suspense } from 'react';
-
 import { FormCard } from '@/components/FormCard';
-import { getProfile } from '@/libs/supabase/db';
-import { updateName } from './actions';
-
-const NameFormCard = () => {
-  return (
-    <Suspense fallback={<NameFormCardSkeleton isDisabled />}>
-      <NameFormCardImpl />
-    </Suspense>
-  );
-};
-
-const NameFormCardImpl = async () => {
-  const { name } = await getProfile();
-
-  return <NameFormCardSkeleton name={name} submit={updateName} />;
-};
 
 interface NameFormCardSkeletonProps {
   name?: string;
@@ -50,4 +32,4 @@ const NameFormCardSkeleton: FC<NameFormCardSkeletonProps> = ({
   );
 };
 
-export default NameFormCard;
+export default NameFormCardSkeleton;

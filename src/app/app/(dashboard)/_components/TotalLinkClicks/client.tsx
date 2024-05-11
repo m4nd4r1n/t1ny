@@ -1,31 +1,34 @@
-import { Suspense } from 'react';
+'use client';
+
+import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
 
 import { AreaChart } from '@/components/AreaChart';
-import CardWithTitle from '@/components/CardWithTitle';
-import { Skeleton } from '@/components/Skeleton';
-import { getClicks } from '@/libs/supabase/db';
+import { useSupabaseBrowser } from '@/libs/supabase/client';
+import {
+  getAnalyticsCountByDay,
+  getAnalyticsCountByMonth,
+} from '@/libs/supabase/queries';
 
 const COUNT_KEY = 'Link clicks';
 
-const TotalLinkClicks = () => {
-  return (
-    <CardWithTitle title='Total link clicks'>
-      <Suspense fallback={<Skeleton className='h-[228px]' />}>
-        <TotalLinkClicksImpl />
-      </Suspense>
-    </CardWithTitle>
-  );
-};
+const TotalLinkClicksClient = () => {
+  const supabase = useSupabaseBrowser();
+  const { data: countByMonth } = useQuery(getAnalyticsCountByMonth(supabase));
+  const { data: countByDay } = useQuery(getAnalyticsCountByDay(supabase));
 
-const TotalLinkClicksImpl = async () => {
-  const data = await getClicks();
+  if (!countByMonth || !countByDay) return null;
+
+  let data: { count: number; date: string }[];
+
+  if (countByMonth.length <= 1) data = countByDay;
+  else data = countByMonth;
 
   const formattedData = data.map(({ count, date }) => ({
     [COUNT_KEY]: Number(count),
     date: Intl.DateTimeFormat('en-US', {
       month: 'short',
       year: '2-digit',
-      day: date.length === 7 ? '2-digit' : undefined,
+      day: date.length !== 7 ? '2-digit' : undefined,
     }).format(new Date(date)),
   }));
 
@@ -50,4 +53,4 @@ const TotalLinkClicksImpl = async () => {
   );
 };
 
-export default TotalLinkClicks;
+export default TotalLinkClicksClient;
