@@ -1,10 +1,11 @@
 import type { EmailOtpType } from '@supabase/supabase-js';
 import type { NextRequest } from 'next/server';
 
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 import { APP_URL, HOME_PATH, SIGN_IN_URL } from '@/constants/urls';
-import { createClient } from '@/libs/supabase/server';
+import { createServerActionSupabaseClient } from '@/libs/supabase/server';
 
 export const GET = async (request: NextRequest) => {
   const { searchParams } = new URL(request.url);
@@ -13,7 +14,8 @@ export const GET = async (request: NextRequest) => {
   const next = searchParams.get('next') ?? HOME_PATH;
 
   if (token_hash && type) {
-    const supabase = createClient();
+    const cookieStore = cookies();
+    const supabase = createServerActionSupabaseClient(cookieStore);
 
     const { error } = await supabase.auth.verifyOtp({
       type,

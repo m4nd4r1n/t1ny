@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 
+import { cookies } from 'next/headers';
+
+import { useSupabaseServer } from '@/libs/supabase/server';
 import { checkUserSignedIn } from '@/utils/check-user';
 import Header from './Header';
 
@@ -10,7 +13,10 @@ export const metadata: Metadata = {
 const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
   children,
 }) => {
-  await checkUserSignedIn();
+  const cookieStore = cookies();
+  const supabase = useSupabaseServer(cookieStore);
+
+  await checkUserSignedIn(supabase);
 
   return (
     <>
