@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers';
+
 import { Link } from '@/components/Link';
 import {
   Navbar,
@@ -6,10 +8,11 @@ import {
   NavbarLogo,
 } from '@/components/Navbar';
 import { APP_URL, SIGN_IN_URL } from '@/constants/urls';
-import { createClient } from '@/libs/supabase/server';
+import { useSupabaseServer } from '@/libs/supabase/server';
 
 const Header = async () => {
-  const supabase = createClient();
+  const cookieStore = cookies();
+  const supabase = useSupabaseServer(cookieStore);
   const {
     data: { user },
   } = await supabase.auth.getUser();
