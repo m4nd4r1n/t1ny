@@ -23,3 +23,13 @@ export const getTrending = (client: TypedSupabaseClient) =>
 
 export const getProfile = (client: TypedSupabaseClient) =>
   client.from('profiles').select('name, avatar').throwOnError().single();
+
+export const updateName = (
+  client: TypedSupabaseClient,
+  userId: string,
+  name: string,
+) =>
+  client.from('profiles').update({ name }).eq('user_id', userId).throwOnError();
+
+export const deleteUser = (client: TypedSupabaseClient, userId: string) =>
+  client.auth.admin.deleteUser(userId);

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 import { FormCard } from '@/components/FormCard';
+import NameFormCard from './_components/NameFormCard';
 import { deleteUser } from './actions';
-import NameFormCard from './NameFormCard';
 
 const DELETE_CONFIRM_TEXT = 'DELETE ACCOUNT';
 
