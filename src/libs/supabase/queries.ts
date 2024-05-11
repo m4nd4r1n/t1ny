@@ -170,3 +170,6 @@ export const getDevicesById = (client: TypedSupabaseClient, urlId: string) =>
       urlid: urlId,
     })
     .throwOnError();
+
+export const getRole = (client: TypedSupabaseClient) =>
+  client.from('user_role').select('role').throwOnError().single();
