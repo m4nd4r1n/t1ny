@@ -122,3 +122,51 @@ export const updateUrlClick = (
   urlId: string,
   clicks: number,
 ) => client.from('urls').update({ clicks }).eq('id', urlId).throwOnError();
+
+export const getAnalyticsCountByMonthWithId = (
+  client: TypedSupabaseClient,
+  urlId: string,
+) =>
+  client
+    .rpc('get_analytics_count_by_month_with_id', {
+      urlid: urlId,
+    })
+    .throwOnError();
+
+export const getAnalyticsCountByDayWithId = (
+  client: TypedSupabaseClient,
+  urlId: string,
+) =>
+  client
+    .rpc('get_analytics_count_by_day_with_id', {
+      urlid: urlId,
+    })
+    .throwOnError();
+
+export const getCountriesById = (client: TypedSupabaseClient, urlId: string) =>
+  client
+    .rpc('get_countries_by_id', {
+      urlid: urlId,
+    })
+    .throwOnError();
+
+export const getBrowsersById = (client: TypedSupabaseClient, urlId: string) =>
+  client
+    .rpc('get_browsers_by_id', {
+      urlid: urlId,
+    })
+    .throwOnError();
+
+export const getOSsById = (client: TypedSupabaseClient, urlId: string) =>
+  client
+    .rpc('get_oss_by_id', {
+      urlid: urlId,
+    })
+    .throwOnError();
+
+export const getDevicesById = (client: TypedSupabaseClient, urlId: string) =>
+  client
+    .rpc('get_devices_by_id', {
+      urlid: urlId,
+    })
+    .throwOnError();

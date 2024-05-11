@@ -5,10 +5,10 @@ import {
   getCountriesById,
   getDevicesById,
   getOSsById,
-} from '@/libs/supabase/db';
-import AnalyticsDonutChartCard from './AnalyticsDonutChartCard';
-import DetailLinkCard from './DetailLinkCard';
-import LinkClickChartCard from './LinkClickChartCard';
+} from '@/libs/supabase/queries';
+import AnalyticsDonutChartCard from './_components/AnalyticsDonutChartCard';
+import DetailLinkCard from './_components/DetailLinkCard';
+import LinkClickChartCard from './_components/LinkClickChartCard';
 
 interface LinkDetailPageProps {
   params: { id: string };
@@ -25,7 +25,7 @@ const LinkDetailPage = ({ params: { id } }: LinkDetailPageProps) => {
       <LinkClickChartCard id={id} />
       <div className='flex flex-col gap-8 pb-8 lg:grid lg:grid-cols-2'>
         <AnalyticsDonutChartCard
-          id={id}
+          urlId={id}
           getData={getCountriesById}
           title='Countries'
           label='Country'
@@ -33,7 +33,7 @@ const LinkDetailPage = ({ params: { id } }: LinkDetailPageProps) => {
           category='count'
         />
         <AnalyticsDonutChartCard
-          id={id}
+          urlId={id}
           getData={getDevicesById}
           title='Devices'
           label='Device'
@@ -41,7 +41,7 @@ const LinkDetailPage = ({ params: { id } }: LinkDetailPageProps) => {
           category='count'
         />
         <AnalyticsDonutChartCard
-          id={id}
+          urlId={id}
           getData={getBrowsersById}
           title='Browsers'
           label='Browser'
@@ -49,7 +49,7 @@ const LinkDetailPage = ({ params: { id } }: LinkDetailPageProps) => {
           category='count'
         />
         <AnalyticsDonutChartCard
-          id={id}
+          urlId={id}
           getData={getOSsById}
           title='OSs'
           label='OS'
